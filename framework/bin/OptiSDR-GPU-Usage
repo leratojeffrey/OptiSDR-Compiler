@@ -1,0 +1,5 @@
+#!/bin/bash
+# Developed by: Lerato Mohapi
+# Scala clear Screen Command Definition: alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+
+nvidia-smi -l 1

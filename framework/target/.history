@@ -1,0 +1,50 @@
+project optila-apps
+project optila
+project optiml-apps
+project optisdr-apps
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+clean
+compile
+exit
+project framework
+project optisdr-apps
+project liszt-apps
+project liszt
+project deliszt-apps
+project deliszt
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+compile
+project optisdr-apps
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+set resolvers += "Sonatype Releases" at "https://oss.sonatype.org/content/repositories/releases/"
+project optisdr-apps
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+compile
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+exit
+project optisdr-apps
+compile
+co
+compile
+co
+compile
+project optisdr-apps

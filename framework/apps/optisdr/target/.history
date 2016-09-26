@@ -1,0 +1,115 @@
+compile
+clear
+compile
+exit
+compile
+exit
+compile
+clc
+compile
+clc
+compile
+exit
+compile
+exit
+compile
+exit
+compile
+exit
+compile
+exit
+compile
+exit
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+clc
+compile
+exit
+compile
+clc
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+exit
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+compile
+clc
+compile
+exit
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+compile
+clc
+compile
+clc
+compile
+clc
+compile
+exit
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+exit
+compile
+exit
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+exit
+compile
+exit
+compile
+exit
+compile
+exit
+compile
+compilecompile
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+compile
+clc
+compile
+exit
+compile
+exit
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+clc
+compile
+clc
+compile
+clc
+compile
+clc
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+clc
+compile
+exit
+compile
+clear
+clc
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile
+clc
+compile
+exit
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+exit
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+compile
+alias clc=eval "\u001B[2J\u001B[0\u003B0H"
+clc
+compile

@@ -1,0 +1,497 @@
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%% Module: FIR Filter Hilbert Transform Approximator %%%%%%%%%%%%%
+//%%%%%%%%%%%%%% Author: Lerato J. Mohapi %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%% Institute: University of Cape Town %%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%% Inlcude some C Libraries %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <cstdlib>
+#include <sys/time.h>
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%% Include Cuda run-time and inline Libraries %%%%%%%%%%%%%%%%%
+#include <cuda.h>
+#include <cuda_runtime_api.h>
+#include <cufft.h>
+
+
+using namespace std;
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%% Including the Kernel: FIR Filter Calculator %%%%%%%%%%%%%%%%%%%%%%%%%%
+#include "firht_kernel.cu"
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%% Including File Utilities: Read and Write Coeffs/Data %%%%%%%%%%%%
+#include "firht_readwrite_funcs.cu"
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%% NetRAD Raw ADC Data Read %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+void readNetRadSamples(string strFilename, unsigned int uiNSamples, vector<short> &vsSamples)
+{
+	//Read
+	ifstream oIFS;
+	oIFS.open(strFilename.c_str(), ifstream::binary);
+	if(!oIFS.is_open())
+	{	
+		cout << "Error unable to open file \"" << strFilename << "\"" << endl;
+		oIFS.close();
+		exit(1);
+	}
+
+	vsSamples.resize(uiNSamples);
+
+	oIFS.read((char*)&vsSamples.front(), sizeof(short) * uiNSamples);
+
+	if(oIFS.gcount() << sizeof(short) * uiNSamples && oIFS.eof())
+	{
+		cout << "Warning: hit end of file after " << oIFS.gcount() / sizeof(short) << " samples. Output is shortened accordingly." << endl;
+		vsSamples.resize(oIFS.gcount() / sizeof(short));
+	}
+
+	oIFS.close();
+
+	int iTemp;
+
+	//Covert from unsigned to signed - Uncomment lines below
+	/*for(unsigned int uiSampleNo = 0; uiSampleNo < uiNSamples; uiSampleNo++)
+	{
+		iTemp = *((unsigned short*)&vsSamples[uiSampleNo]);
+		iTemp -= 8192;
+		vsSamples[uiSampleNo] = iTemp;
+	}*/
+}
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%% Read 50MHz Chirp Reference Signal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+void readChirp(string strFilename, unsigned int uiNSamples, vector<float> &vsSamples)
+{
+	//Read
+	ifstream oIFS;
+	oIFS.open(strFilename.c_str(), ifstream::binary);
+	if(!oIFS.is_open())
+	{	
+		cout << "Error unable to open file \"" << strFilename << "\"" << endl;
+		oIFS.close();
+		exit(1);
+	}
+
+	vsSamples.resize(uiNSamples);
+
+	oIFS.read((char*)&vsSamples.front(), sizeof(float) * uiNSamples);
+
+	if(oIFS.gcount() << sizeof(float) * uiNSamples && oIFS.eof())
+	{
+		cout << "Warning: hit end of file after " << oIFS.gcount() / sizeof(float) << " samples. Output is shortened accordingly." << endl;
+		vsSamples.resize(oIFS.gcount() / sizeof(float));
+	}
+
+	oIFS.close();
+}
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%% Lets See if We can Borrow from nVidia Helper Functions %%%%%%%%%%%
+//%%%%%%%%%% This Function we use for Scaling for any GPU with < 32-Cores %%%%%
+inline int _ConvertSMVer2Cores(int major, int minor)
+{    // Defines for GPU Architecture types (using the SM version to determine the # of cores per SM
+    typedef struct
+    {
+        int SM; // 0xMm (hexidecimal notation), M = SM Major version, and m = SM minor version
+        int Cores;
+    } sSMtoCores;
+
+    sSMtoCores nGpuArchCoresPerSM[] ={
+        {0x10,8}, // Tesla Generation (SM 1.0) G80 class
+        {0x11,8}, // Tesla Generation (SM 1.1) G8x class
+        {0x12,8}, // Tesla Generation (SM 1.2) G9x class
+        {0x13,8}, // Tesla Generation (SM 1.3) GT200 class
+        {0x20,32}, // Fermi Generation (SM 2.0) GF100 class
+        {0x21,48}, // Fermi Generation (SM 2.1) GF10x class
+        {0x30,192}, // Kepler Generation (SM 3.0) GK10x class
+        {0x35,192}, // Kepler Generation (SM 3.5) GK11x class
+        {-1,-1}
+    };
+    int index = 0;
+    while (nGpuArchCoresPerSM[index].SM != -1)
+    {
+        if (nGpuArchCoresPerSM[index].SM == ((major << 4) + minor))
+        {
+            return nGpuArchCoresPerSM[index].Cores;
+        }
+        index++;
+    }
+    // If we don't find the values, we default use the previous one to run properly
+    printf("MapSMtoCores for SM %d.%d is undefined.  Default to use %d Cores/SM\n", major, minor, nGpuArchCoresPerSM[7].Cores);
+
+    return nGpuArchCoresPerSM[7].Cores;
+}
+//%%%%%% Good We Can .....! %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%% Copy Real Data to Complex Data, imag part is zero %%%%%%%%%%%%%%%%%%%%
+__global__ void copyR2C(float *ivec,cufftComplex *cxv,int N)
+{
+	int i=threadIdx.x+blockIdx.x*blockDim.x;
+	int j=threadIdx.y+blockIdx.y*blockDim.y;
+	int myindex= j*N+i;
+	//
+	if((i<N) && (j<N))
+	{
+		cxv[myindex].x = ivec[myindex];
+		cxv[myindex].y = 0.0f;
+	}
+
+}
+//
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%% Copy Complex Data to Complex Data, imag part is zero %%%%%%%%%%%%%%%%%%%%
+__global__ void copyC2C(float *rivec,float *iivec,cufftComplex *cxv,int N)
+{
+	int i= blockIdx.x; //threadIdx.x+blockIdx.x*blockDim.x;
+	//int j=threadIdx.y+blockIdx.y*blockDim.y;
+	//int myindex= j*N+i;
+	//
+	if(i<N)
+	{
+		cxv[i].x = rivec[i];
+		cxv[i].y = iivec[i];
+	}
+
+}
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%% Complex Data Multiplication Kernel %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+int main(int argc, char **argv)
+{
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%% Fill a cudaDeviceProp structure with the properties %%%%%%%%%%%%
+    //%%%%%%%%% we need our device to have %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    cudaDeviceProp deviceProp;
+    cudaEvent_t start, stop;
+    int sN = 1 << 22;
+    unsigned int i = 0;
+    //%%%%%%%%%%%%%% otherwise use device with highest Gflops/s %%%%%%%%%%%%%%%%
+    int cuda_device = 0;
+    //char *pciBusId = " "; 
+    // Get device from Command Line Arguments
+    //cuda_device = cudaGetDeviceId();
+    //cudaDeviceGetByPCIBusId(&cuda_device,pciBusId);
+    cudaGetDevice(&cuda_device); // Get Just the CUDA Device name
+    cudaSetDevice(cuda_device);
+    cudaGetDeviceProperties(&deviceProp, cuda_device);
+    printf("[SDR_DSL_INFO]$ Device ID :[%d] Name:[%s]\n",cuda_device, deviceProp.name);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%% My Main code starts here %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    float scale_factor;
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%% Checking Number of Cores and Scaling Down for < 32 Cores %%%%%%
+    scale_factor = max((32.0f / (_ConvertSMVer2Cores(deviceProp.major, deviceProp.minor) * (float)deviceProp.multiProcessorCount)), 1.0f);
+    sN = (int)((float)sN / scale_factor);
+    
+    printf("[SDR_DSL_INFO]$ Device name: %s\n", deviceProp.name);
+    printf("[SDR_DSL_INFO]$ Device Maximum Threads Per Block = %d, and WarpSize = %d.\n",deviceProp.maxThreadsPerBlock, deviceProp.warpSize);
+    printf("[SDR_DSL_INFO]$ CUDA Capability %d.%d hardware with %d multi-processors\n",deviceProp.major,deviceProp.minor,deviceProp.multiProcessorCount);
+    printf("[SDR_DSL_INFO]$ Scale_Factor = %.2f\n", 1.0f/scale_factor);
+    printf("[SDR_DSL_INFO]$ array_size   = %d\n\n", sN);
+
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%% Lets Initialize Sizes and Lengths %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    int NB = 20; // 10000
+    //if (cutCheckCmdLineFlag(argc, (const char**)argv, "NB") )
+    //cutGetCmdLineArgumenti(argc, (const char **) argv, "NB", &NB);
+
+    int M = 32; //max=512
+    int TapOrder = 32; //max= 256
+    //if (cutCheckCmdLineFlag(argc, (const char**)argv, "M") )
+    //cutGetCmdLineArgumenti(argc, (const char **) argv, "M", &M);
+
+    unsigned int timer = 0;
+    //cutilCheckError( cutCreateTimer( &timer));
+
+    const unsigned int K = ( (unsigned int)(4096/TapOrder) - 1 ); // max=127\M=32, max=7\M=512
+
+    const unsigned int N = TapOrder*(K+1);
+    const unsigned int P = N-TapOrder+1;
+    const unsigned int NT = TapOrder;
+
+    const unsigned int x_len = 8388608;//(NB*K+1)*TapOrder;
+    const unsigned int y_len = x_len-TapOrder+1;
+
+
+    printf("FIR order M: %d with NT %d threads\n", M, NT);
+    printf("No. of Blocks:%d, where K:%d, perBlock inp:%d perBlock out:%d\n", NB, K, N, P);
+    //printf("\txlen:%d , y_len:%d\n\n", x_len, y_len);
+
+    unsigned int x_size = sizeof(float) * x_len;
+    unsigned int y_size = sizeof(float) * y_len;
+    unsigned int coeffs_size = sizeof(float) * TapOrder;
+    //
+    unsigned int shmem_size = sizeof(float) * P;
+    int FTPOINT = 2048;
+    //dim3 dimGrid(FTPOINT,FTPOINT);
+    //dim3 dimBlock(FTPOINT,FTPOINT);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%% Read and Store Coeffs into Texture memory %%%%%%%%%%%%%%%
+    // Initialize TapOrder and Coeffs Size
+    //int TapOrder = 128; //max= 256
+
+    //unsigned int coeffs_size = sizeof(float) * TapOrder;
+    // Set Tap Order from Command-line
+    //if (cutCheckCmdLineFlag(argc, (const char**)argv, "M") )
+    //{
+    //    cutGetCmdLineArgumenti(argc, (const char **) argv, "M", &TapOrder);
+    //}
+    //Set Coeffs Memory Size based on Tap Order from Command line
+    if(TapOrder <= 512)
+    {
+        coeffs_size = sizeof(float) * TapOrder;
+    }
+    // Read coeffs from File
+    //const char *coeffs_path="../coeffs/remzFIRCoeffs.dat";
+    //float *host_coeffs_mem = (float*) malloc(coeffs_size);
+    //readFileFCoeff(coeffs_path, host_coeffs_mem,TapOrder,false); // RName this and rewrite
+
+    // Copy to texture by cudaArray
+    //cudaChannelFormatDesc floatCTex = cudaCreateChannelDesc<float>();
+    //cudaArray *coeffs_cuda_array;
+    //cudaMallocArray(&coeffs_cuda_array,&floatCTex,coeffs_size,1*sizeof(float));
+
+    //cudaMemcpyToArray(coeffs_cuda_array,0,0,host_coeffs_mem,coeffs_size,cudaMemcpyHostToDevice);
+    //cudaBindTextureToArray(RemezCoeffs,coeffs_cuda_array);
+
+    printf("\n[SDR_DSL_INFO]$ Printing Filter Coeffs of Length %i: \n",TapOrder);
+    //for(int x=0; x< 5; x++)
+    //{
+    //    printf("%f\n",host_coeffs_mem[x]);
+    //}
+    printf("[SDR_DSL_INFO]$ Done...!\n");
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%% Generate or Read Data from File %%%%%%%%%%%%%%%%%%%%%%%%
+    //const unsigned int chunk_size = 4096; // Size of our Chunk
+    // We want to send to Device a Chunk at once for processing - inc. perf.
+    //int     Data_Chunk_Size = sizeof(float) * chunk_size;
+    // max=127\M=32, max=16\M=256
+    //const unsigned int J = ((unsigned int)(chunk_size/TapOrder) - 1);
+    // Not Sure Why I need this, used it for Blocks but I will keep for now
+    //const unsigned int iN = TapOrder*(J+1);
+    struct timeval t1, t2;
+    gettimeofday(&t1, 0);
+    printf("[SDR_DSL_INFO]$ Reading %i NetRAD Raw ADC Samples...!\n",x_len);
+    // Allocate Host Memory and Generate Input Data
+    float *hidata 	= (float*) malloc(x_size); //Allocate memory for ADC Data
+    float *ref3sig_r	= (float*) malloc(FTPOINT); //Allocate memory for Chirp
+    float *ref3sig_i 	= (float*) malloc(FTPOINT); //Allocate memory for Chirp
+    vector<short> vsNetRadSamples;
+
+    readNetRadSamples("/media/201x_NetRad/ZA_Trials_2011_06/radarData/2011-06-04/e11_06_04_1740_34_P1_1_130000_S0_1_2047_node3.bin",x_len,vsNetRadSamples);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%% Reading Chirp Signal %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    vector<float> rref3sig;
+    readChirp("../data/rref3sig.dat",300,rref3sig);
+    vector<float> iref3sig;
+    readChirp("../data/iref3sig.dat",300,iref3sig);
+    //
+    for(i = 0; i < x_len; i++)
+    {
+        hidata[i] = (float)(vsNetRadSamples[i]); // NetRAD ADC Data
+    }
+    //
+    for(int idx=0;idx<FTPOINT;idx++)
+    {
+	if(idx < 300) // Reading 300 Chirp Samples
+	{
+		ref3sig_r[idx] = rref3sig[idx];
+		ref3sig_i[idx] = iref3sig[idx];
+	}
+	//else
+	//{
+	//	printf("%f, ",ref3sig_r[idx]);// = (float)0.0;
+	//}
+    }  
+    gettimeofday(&t2, 0);
+    double time = (1000000.0*(t2.tv_sec-t1.tv_sec) + t2.tv_usec-t1.tv_usec)/1000000.0;
+    printf("\n[SDR_DSL_INFO]$ Done Reading NetRAD Data in %f ms ...!\n", time);
+    // Transfer Data From Host to Device
+    float*  d_VAL_A; //Input Varaible
+    float*  d_rref3sig;
+    float*  d_iref3sig; //Input Varaible
+    // Allocate memory of Size Data Chunk we will be sending to GPU for Processing
+    cudaMalloc((void**) &d_VAL_A,x_size);
+    cudaMalloc((void**) &d_rref3sig,FTPOINT);
+    cudaMalloc((void**) &d_iref3sig,FTPOINT);
+    //
+    cudaMemcpy(d_VAL_A,hidata,x_size,cudaMemcpyHostToDevice);
+    cudaMemcpy(d_rref3sig,ref3sig_r,FTPOINT,cudaMemcpyHostToDevice);
+    cudaMemcpy(d_iref3sig,ref3sig_i,FTPOINT,cudaMemcpyHostToDevice);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%% Memory Allocation for Shared %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    // Shared Memory must be equal to number of FIR Outputs expected - and this
+    // is the Number of Data Chunk minus the Tap Order plus 1 just to be safe
+    //unsigned int    Shared_Mem_Size = sizeof(float) * P;
+    //float*          Output_Data; //Output Varaible
+    // Allocate memory of Size Data Chunk we will be sending to GPU for Processing
+    //cudaMalloc((void**) &Output_Data,x_size);
+        // setup execution parameters
+    //dim3  grid( NB, 1, 1);
+    //dim3  threads(NT, 1, 1);
+
+    cudaThreadSynchronize();
+    // Measuring Kernel Execution Time
+    // 
+    struct timeval t3, t4;
+    gettimeofday(&t3, 0); 
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%% Initial Kernel Calling %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    //transposed_fir<<<grid,threads,Shared_Mem_Size>>>(d_VAL_A,Output_Data,TapOrder,K);
+    
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%% Recording Data Copies h2d & d2h, and Kernel Exec. Time %%%%%%%%
+
+    // check if kernel execution generated and error // when _DEBUG also calls cudaThreadSynchronize() 
+    //cutilCheckMsg("Kernel execution failed");
+#ifndef _DEBUG
+    // wait till kernel is done
+    cudaThreadSynchronize();
+#endif
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    gettimeofday(&t4, 0);
+    double timeker = (1000000.0*(t4.tv_sec-t3.tv_sec) + t4.tv_usec-t3.tv_usec)/1000000.0;
+    printf("\n[SDR_DSL_INFO]$ Done FIR Filtering NetRAD Data in %f ms ...!\n", timeker);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%% Perform FFT Of NetRAD Data %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    struct timeval t5, t6;
+    gettimeofday(&t5, 0); // Start Time for FFT Exec.
+    // Complex Data I/O Variables for Device
+    cufftComplex *fftinp_d,*fftout_d,*ifftout_d,*ref3sig_d;
+
+    //
+    cudaMalloc((void**)&fftinp_d,sizeof(cufftComplex)*FTPOINT); // Need to Master How to Do memory Allocations
+    cudaMalloc((void**)&fftout_d,sizeof(cufftComplex)*FTPOINT);
+    cudaMalloc((void**)&ref3sig_d,sizeof(cufftComplex)*FTPOINT);
+    cudaMalloc((void**)&ifftout_d,sizeof(cufftComplex)*FTPOINT);
+    //
+    copyR2C<<<512,32>>>(d_VAL_A,fftinp_d,FTPOINT); // Study How to Instantiate Kernels per device??
+    //
+//#ifndef _DEBUG
+    // wait till kernel is done
+//    cudaThreadSynchronize();
+//#endif
+    //
+    cufftHandle plan;
+    cufftPlan2d(&plan,FTPOINT,FTPOINT,CUFFT_C2C); // Instantiating Build-in CUDA Kernels
+    //cufftPlan1d(&plan,FTPOINT,CUFFT_C2C,1);
+    cufftExecC2C(plan,fftinp_d,fftout_d,CUFFT_FORWARD);
+//#ifndef _DEBUG
+    // wait till kernel is done
+//    cudaThreadSynchronize();      // Need to know how Manage Thread Synchronization
+//#endif
+    // Perform Complex Element-Wise Multiplication
+    //cudaMemcpy(ifftinp_d,fftout_d,FTPOINT,cudaMemcpyDeviceToDevice);
+    // Perform iFFT of Complex Element-Wise Multiplication Output Data
+    cufftExecC2C(plan,fftout_d,ifftout_d,CUFFT_INVERSE);
+    //
+//#ifndef _DEBUG
+    // wait till kernel is done
+//    cudaThreadSynchronize();
+//#endif
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    gettimeofday(&t6, 0);
+    double timeker2 = (1000000.0*(t6.tv_sec-t5.tv_sec) + t6.tv_usec-t5.tv_usec)/1000000.0;
+    printf("\n[SDR_DSL_INFO]$ Done FFTing NetRAD Data in %f ms ...!\n", timeker2);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%% 2048 Blocks,  
+    copyC2C<<<512,32>>>(d_VAL_A,d_iref3sig,ref3sig_d,FTPOINT); // Study How to Instantiate Kernels per device??
+    //
+#ifndef _DEBUG
+    // wait till kernel is done
+    cudaThreadSynchronize();
+#endif
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    struct timeval t7, t8;
+    gettimeofday(&t7, 0); // Start Time for Dev2Host Copying
+    //
+    // Copy results From Device to Host
+    float* fftout_h = (float*) malloc(2*FTPOINT);
+    //float* fftinp_h = (float*) malloc(2*FTPOINT);
+    cufftComplex* cfftout_h = (cufftComplex*) malloc(FTPOINT);
+    cufftComplex* cifftout_h = (cufftComplex*) malloc(FTPOINT);
+    cufftComplex* ref3sig_h = (cufftComplex*) malloc(FTPOINT);
+    //float* ifftout_h = (float*) malloc(2*FTPOINT);
+    cudaMemcpy(fftout_h,fftinp_d,FTPOINT,cudaMemcpyDeviceToHost);
+    cudaMemcpy(cfftout_h,fftout_d,FTPOINT,cudaMemcpyDeviceToHost);
+    cudaMemcpy(cifftout_h,ifftout_d,FTPOINT,cudaMemcpyDeviceToHost);
+    cudaMemcpy(ref3sig_h,ref3sig_d,FTPOINT,cudaMemcpyDeviceToHost);  // Checking Ref3Sig
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //
+    //float *tmpout = (float*) malloc(FTPOINT);
+    vector<float> rData;
+    vector<float> iData;
+    rData.resize(FTPOINT);
+    iData.resize(FTPOINT);
+    //float* iData = (float*)malloc(FTPOINT);
+    printf("FFT Output Data = [");
+    for (int ik = 0; ik < FTPOINT; ik++)
+    {
+	//rData[ik] = cfftout_h[ik].x;
+        //iData[ik] = cfftout_h[ik].y;
+        //printf("%.7e + %.7ei, ",cifftout_h[i].x/FTPOINT,cifftout_h[i].y/FTPOINT);
+	//if(isnan(cifftout_h[i].x)||isnan(cifftout_h[i].y)) printf("\n\n ...It is Nan... \n\n");
+	printf("%f + %fi, ",ref3sig_h[ik].x,ref3sig_h[ik].y);
+        if(ref3sig_h[ik].x == 0.0f)
+	{
+		printf("\n\n\n ...Ends Here:%i ...\n\n\n",ik);
+		break;
+	}
+    }
+    printf("]\n");
+    //
+    
+    //
+    writeFileF("../data/fftinput.dat",hidata,FTPOINT);
+    writeFileF("../data/ftoutput.dat",fftout_h,FTPOINT);
+    //writeFileF("../data/iftoutput.dat",ifftout_h,FTPOINT);
+    //
+    writeComplexFileF("../data/complexoutput.dat",rData,iData,FTPOINT);
+    //
+    gettimeofday(&t8, 0);
+    double timeker3 = (1000000.0*(t8.tv_sec-t7.tv_sec) + t8.tv_usec-t7.tv_usec)/1000000.0;
+    printf("[SDR_DSL_REP]$ Memcpy device to host\t: %f ms\n",timeker3);
+    //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    //%%%%%%%%%%%%%%%%%%%%%% Shutting Down and Clearing Memory Alloc %%%%%%%%%%
+    printf("[SDR_DSL_INFO].....Shutting down...\n");
+    free(hidata);
+    free(fftout_h);
+    free(ref3sig_r);
+    free(ref3sig_i);
+    free(cifftout_h);
+    free(ref3sig_h);
+    //free(host_coeffs_mem);
+    //
+    //cudaUnbindTexture(RemezCoeffs);
+    //cudaFreeArray(coeffs_cuda_array);
+    //cudaFree(Output_Data);
+    cudaFree(d_VAL_A);
+    //
+    cudaFree(fftinp_d);
+    cudaFree(fftout_d);
+    //cudaFree(ifftinp_d);
+    cudaFree(ifftout_d);
+    cudaFree(d_rref3sig);
+    cudaFree(d_iref3sig);
+    cudaFree(ref3sig_d);
+    cudaThreadExit();
+    //
+    cufftDestroy(plan);
+    cudaDeviceReset();
+    //cutilExit(argc, argv);
+}
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%% End of FIR Filter Implementation %%%%%%%%%%%%%%%%%%%%
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

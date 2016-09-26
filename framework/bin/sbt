@@ -1,0 +1,1 @@
+java -Xmx4g -XX:MaxPermSize=1g -XX:ReservedCodeCacheSize=128m -jar `dirname $0`/sbt-launch.jar "$@"

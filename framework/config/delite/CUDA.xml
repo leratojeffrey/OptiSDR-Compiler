@@ -1,0 +1,10 @@
+<DeliteExternalLib>
+<compiler> /usr/bin/nvcc </compiler> <!-- path to nvcc -->
+<make> /usr/bin/make </make>
+<arch> 2.0 </arch> <!-- compute capability of gpu -->
+<headers>
+  <prefix> -I </prefix>
+  <path> /home/lmohapi/OptiSDR2/jdk1.8.0_92/include </path> <!-- required for JNI -->
+  <path> /home/lmohapi/OptiSDR2/jdk1.8.0_92/include/linux </path>
+</headers>
+</DeliteExternalLib>

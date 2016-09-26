@@ -1,0 +1,12 @@
+<DeliteExternalLib>
+<compiler>/usr/bin/g++</compiler>
+<headers>
+  <prefix> -I </prefix>
+  <path> /usr/include </path>
+  <path> /home/lmohapi/OptiSDR2/Delite/runtime/opencl/blas </path>
+</headers>
+<libs>
+    <prefix> -L </prefix>
+    <path> /home/lmohapi/OptiSDR2/Delite/runtime/opencl/blas </path>
+</libs>
+</DeliteExternalLib>

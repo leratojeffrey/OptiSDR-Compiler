@@ -1,0 +1,958 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x00007fdca19d89da, pid=22651, tid=0x00007fdc7238c700
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_92-b14) (build 1.8.0_92-b14)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.92-b14 mixed mode linux-amd64 compressed oops)
+# Problematic frame:
+# C  [libc.so.6+0x889da]  strlen+0x2a
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fdc9c369800):  JavaThread "AccHostThread-0" [_thread_in_native, id=22667, stack(0x00007fdc7228c000,0x00007fdc7238d000)]
+
+siginfo: si_signo: 11 (SIGSEGV), si_code: 1 (SEGV_MAPERR), si_addr: 0x0000000000002015
+
+Registers:
+RAX=0x0000000000002015, RBX=0x00007fdc2a3496e0, RCX=0x0000000000000015, RDX=0x00007fdc2a331f18
+RSP=0x00007fdc7238b198, RBP=0x0000000000002015, RSI=0x00007fdc68fb4b00, RDI=0x0000000000002015
+R8 =0x00007fdca1d109e0, R9 =0x00007fdc68fb4b44, R10=0x0000000000000000, R11=0x0000000000000000
+R12=0x00007fdc691f3e00, R13=0x00007fdc3bc4a770, R14=0x00007fdc3bc475d0, R15=0x00007fdc38000a38
+RIP=0x00007fdca19d89da, EFLAGS=0x0000000000010293, CSGSFS=0x0000000000000033, ERR=0x0000000000000004
+  TRAPNO=0x000000000000000e
+
+Top of Stack: (sp=0x00007fdc7238b198)
+0x00007fdc7238b198:   00007fdc68f4e140 00007fdc691f3e00
+0x00007fdc7238b1a8:   42755c4f0d57db68 00000000577e315d
+0x00007fdc7238b1b8:   000000000008a1d1 00007fdc3bc475d0
+0x00007fdc7238b1c8:   00007fdc38000a30 00007fdc691f3c60
+0x00007fdc7238b1d8:   00007fdc68f497e6 00000008278a0000
+0x00007fdc7238b1e8:   00000000000f4240 0000000100000001
+0x00007fdc7238b1f8:   0000000827c80000 00000000000f4240
+0x00007fdc7238b208:   0000000100000001 00000008274c0000
+0x00007fdc7238b218:   00000000000f4240 0000000100000001
+0x00007fdc7238b228:   0000000828060000 00000000000f4240
+0x00007fdc7238b238:   0000000100000001 000000000000000b
+0x00007fdc7238b248:   00007fdc38000a48 00007fdc7238b4b0
+0x00007fdc7238b258:   00007fdc3bc48ca0 00007fdc3bd7abc0
+0x00007fdc7238b268:   00007fdc3bcc8090 00007fdc3bcc8d40
+0x00007fdc7238b278:   00007fdc3bd7abc0 00007fdc3bcc8d40
+0x00007fdc7238b288:   00007fdca1248bb7 00007fdc9c369800
+0x00007fdc7238b298:   00007fdc44000e18 00007fdc7238b4bf
+0x00007fdc7238b2a8:   00007fdc44000b40 00000002c0689e00
+0x00007fdc7238b2b8:   00000007c0689e00 00007fdc6922cfb8
+0x00007fdc7238b2c8:   00007fdc38000a50 00007fdc38000a60
+0x00007fdc7238b2d8:   00007fdc38000a68 00007fdc38000a70
+0x00007fdc7238b2e8:   00007fdc38000a78 0000000000000000
+0x00007fdc7238b2f8:   0000000000000000 00007fdc6922cfb8
+0x00007fdc7238b308:   00007fdc9c369800 00007fdc6922cfb8
+0x00007fdc7238b318:   00007fdc9c369800 00007fdc3bd7ad40
+0x00007fdc7238b328:   00007fdc3bc4ad50 00007fdc3bc470d0
+0x00007fdc7238b338:   00007fdc9c367800 00007fdc382b2580
+0x00007fdc7238b348:   00007fdc9c369800 00007fdc7238b3e0
+0x00007fdc7238b358:   00007fdca12493f6 00007fdc7238b570
+0x00007fdc7238b368:   00007fdc7238b4bf 00007fdca18bef50
+0x00007fdc7238b378:   00007fdc78ae3260 0000000000000002
+0x00007fdc7238b388:   00000000000003d8 000000000000015c 
+
+Instructions: (pc=0x00007fdca19d89da)
+0x00007fdca19d89ba:   66 45 0f ef d2 66 45 0f ef db 48 89 f8 48 89 f9
+0x00007fdca19d89ca:   48 81 e1 ff 0f 00 00 48 81 f9 cf 0f 00 00 77 66
+0x00007fdca19d89da:   f3 44 0f 6f 20 66 45 0f 74 e0 66 41 0f d7 d4 85
+0x00007fdca19d89ea:   d2 74 04 0f bc c2 c3 48 83 e0 f0 66 44 0f 74 48 
+
+Register to memory mapping:
+
+RAX=0x0000000000002015 is an unknown value
+RBX=0x00007fdc2a3496e0: _ZSt4cout+0 in /usr/lib/x86_64-linux-gnu/libstdc++.so.6 at 0x00007fdc2a048000
+RCX=0x0000000000000015 is an unknown value
+RDX=0x00007fdc2a331f18: _ZTVSo+0x18 in /usr/lib/x86_64-linux-gnu/libstdc++.so.6 at 0x00007fdc2a048000
+RSP=0x00007fdc7238b198 is pointing into the stack for thread: 0x00007fdc9c369800
+RBP=0x0000000000002015 is an unknown value
+RSI=0x00007fdc68fb4b00: <offset 0xa5b00> in /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so at 0x00007fdc68f0f000
+RDI=0x0000000000002015 is an unknown value
+R8 =0x00007fdca1d109e0: <offset 0x3c09e0> in /lib/x86_64-linux-gnu/libc.so.6 at 0x00007fdca1950000
+R9 =0x00007fdc68fb4b44: <offset 0xa5b44> in /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so at 0x00007fdc68f0f000
+R10=0x0000000000000000 is an unknown value
+R11=0x0000000000000000 is an unknown value
+R12=0x00007fdc691f3e00: lastAlloc+0 in /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so at 0x00007fdc68f0f000
+R13=0x00007fdc3bc4a770 is an unknown value
+R14=0x00007fdc3bc475d0 is an unknown value
+R15=0x00007fdc38000a38 is an unknown value
+
+
+Stack: [0x00007fdc7228c000,0x00007fdc7238d000],  sp=0x00007fdc7238b198,  free space=1020k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libc.so.6+0x889da]  strlen+0x2a
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  Executable1$.hostExecutable1()V+0
+j  Executable1$.run()V+8
+j  ppl.delite.runtime.executor.ExecutionThread.executeWork(Lppl/delite/runtime/codegen/DeliteExecutable;)V+1
+j  ppl.delite.runtime.executor.ExecutionThread.liftedTree1$1()V+13
+j  ppl.delite.runtime.executor.ExecutionThread.run()V+8
+j  ppl.delite.runtime.executor.AccExecutionThread.run()V+22
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007fdc9c910000 JavaThread "process reaper" daemon [_thread_blocked, id=22671, stack(0x00007fdc6a903000,0x00007fdc6a93c000)]
+=>0x00007fdc9c369800 JavaThread "AccHostThread-0" [_thread_in_native, id=22667, stack(0x00007fdc7228c000,0x00007fdc7238d000)]
+  0x00007fdc9c366000 JavaThread "ExecutionThread-0" [_thread_blocked, id=22666, stack(0x00007fdc7238d000,0x00007fdc7248e000)]
+  0x00007fdc9c0df800 JavaThread "Service Thread" daemon [_thread_blocked, id=22664, stack(0x00007fdc729ac000,0x00007fdc72aad000)]
+  0x00007fdc9c0c2800 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=22663, stack(0x00007fdc72aad000,0x00007fdc72bae000)]
+  0x00007fdc9c0c0800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=22662, stack(0x00007fdc72bae000,0x00007fdc72caf000)]
+  0x00007fdc9c0be000 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=22661, stack(0x00007fdc72caf000,0x00007fdc72db0000)]
+  0x00007fdc9c0bc800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=22660, stack(0x00007fdc72db0000,0x00007fdc72eb1000)]
+  0x00007fdc9c089800 JavaThread "Finalizer" daemon [_thread_blocked, id=22659, stack(0x00007fdc73593000,0x00007fdc73694000)]
+  0x00007fdc9c085000 JavaThread "Reference Handler" daemon [_thread_blocked, id=22658, stack(0x00007fdc73694000,0x00007fdc73795000)]
+  0x00007fdc9c00f800 JavaThread "main" [_thread_blocked, id=22652, stack(0x00007fdca264b000,0x00007fdca274c000)]
+
+Other Threads:
+  0x00007fdc9c07d000 VMThread [stack: 0x00007fdc73795000,0x00007fdc73896000] [id=22657]
+  0x00007fdc9c0e2800 WatcherThread [stack: 0x00007fdc728ab000,0x00007fdc729ac000] [id=22665]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 2743296K, used 434326K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2740736K, 15% used [0x0000000715580000,0x000000072fda5ac0,0x00000007bca00000)
+  from space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+  to   space 27648K, 0% used [0x00000007bca00000,0x00000007bca00000,0x00000007be500000)
+ ParOldGen       total 5592576K, used 72963K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 1% used [0x00000005c0000000,0x00000005c4740e60,0x0000000715580000)
+ Metaspace       used 41696K, capacity 41895K, committed 42328K, reserved 1085440K
+  class space    used 6670K, capacity 6734K, committed 6784K, reserved 1048576K
+
+Card table byte_map: [0x00007fdc8b1e9000,0x00007fdc8c1ea000] byte_map_base: 0x00007fdc883e9000
+
+Marking Bits: (ParMarkBitMap*) 0x00007fdca19234c0
+ Begin Bits: [0x00007fdc7a33a000, 0x00007fdc8233a000)
+ End Bits:   [0x00007fdc8233a000, 0x00007fdc8a33a000)
+
+Polling page: 0x00007fdca276f000
+
+CodeCache: size=245760Kb used=36582Kb max_used=36809Kb free=209177Kb
+ bounds [0x00007fdc8c5aa000, 0x00007fdc8e9ca000, 0x00007fdc9b5aa000]
+ total_blobs=9605 nmethods=9215 adapters=299
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 179,387 Thread 0x00007fdc9c0c0800 11537       4       scala.collection.immutable.Map$Map3::get (249 bytes)
+Event: 179,395 Thread 0x00007fdc9c0be000 11538       4       java.io.File::exists (43 bytes)
+Event: 179,398 Thread 0x00007fdc9c0c0800 nmethod 11537 0x00007fdc8e97ca10 code [0x00007fdc8e97cbe0, 0x00007fdc8e97d398]
+Event: 179,410 Thread 0x00007fdc9c0be000 nmethod 11538 0x00007fdc8e9b3f90 code [0x00007fdc8e9b4160, 0x00007fdc8e9b4898]
+Event: 179,546 Thread 0x00007fdc9c0c0800 11539       4       scala.collection.immutable.HashMap$HashTrieMap::size (5 bytes)
+Event: 179,547 Thread 0x00007fdc9c0c0800 nmethod 11539 0x00007fdc8d17b250 code [0x00007fdc8d17b3a0, 0x00007fdc8d17b3f8]
+Event: 179,548 Thread 0x00007fdc9c0be000 11540       4       sun.misc.MetaIndex::mayContain (51 bytes)
+Event: 179,555 Thread 0x00007fdc9c0be000 nmethod 11540 0x00007fdc8cb17950 code [0x00007fdc8cb17ac0, 0x00007fdc8cb17d38]
+Event: 179,557 Thread 0x00007fdc9c0c2800 11541       1       java.util.concurrent.locks.AbstractOwnableSynchronizer::getExclusiveOwnerThread (5 bytes)
+Event: 179,557 Thread 0x00007fdc9c0c2800 nmethod 11541 0x00007fdc8cb3f190 code [0x00007fdc8cb3f2e0, 0x00007fdc8cb3f3f0]
+
+GC Heap History (10 events):
+Event: 119,692 GC heap before
+{Heap before GC invocations=100 (full 0):
+ PSYoungGen      total 2793472K, used 2792271K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 100% used [0x0000000715580000,0x00000007bfb00000,0x00000007bfb00000)
+  from space 2560K, 53% used [0x00000007bfb00000,0x00000007bfc53fb8,0x00000007bfd80000)
+  to   space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+ ParOldGen       total 5592576K, used 11720K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0b72178,0x0000000715580000)
+ Metaspace       used 13281K, capacity 13560K, committed 13824K, reserved 1060864K
+  class space    used 2429K, capacity 2452K, committed 2560K, reserved 1048576K
+Event: 119,694 GC heap after
+Heap after GC invocations=100 (full 0):
+ PSYoungGen      total 2793472K, used 1800K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bfb00000)
+  from space 2560K, 70% used [0x00000007bfd80000,0x00000007bff421a0,0x00000007c0000000)
+  to   space 2560K, 0% used [0x00000007bfb00000,0x00000007bfb00000,0x00000007bfd80000)
+ ParOldGen       total 5592576K, used 11807K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0b87f90,0x0000000715580000)
+ Metaspace       used 13281K, capacity 13560K, committed 13824K, reserved 1060864K
+  class space    used 2429K, capacity 2452K, committed 2560K, reserved 1048576K
+}
+Event: 162,328 GC heap before
+{Heap before GC invocations=101 (full 0):
+ PSYoungGen      total 2793472K, used 2486242K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 89% used [0x0000000715580000,0x00000007acfb6740,0x00000007bfb00000)
+  from space 2560K, 70% used [0x00000007bfd80000,0x00000007bff421a0,0x00000007c0000000)
+  to   space 2560K, 0% used [0x00000007bfb00000,0x00000007bfb00000,0x00000007bfd80000)
+ ParOldGen       total 5592576K, used 11807K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0b87f90,0x0000000715580000)
+ Metaspace       used 20922K, capacity 21104K, committed 21248K, reserved 1067008K
+  class space    used 3737K, capacity 3814K, committed 3840K, reserved 1048576K
+Event: 162,333 GC heap after
+Heap after GC invocations=101 (full 0):
+ PSYoungGen      total 2793472K, used 2539K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bfb00000)
+  from space 2560K, 99% used [0x00000007bfb00000,0x00000007bfd7afe8,0x00000007bfd80000)
+  to   space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+ ParOldGen       total 5592576K, used 16037K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0fa9618,0x0000000715580000)
+ Metaspace       used 20922K, capacity 21104K, committed 21248K, reserved 1067008K
+  class space    used 3737K, capacity 3814K, committed 3840K, reserved 1048576K
+}
+Event: 162,333 GC heap before
+{Heap before GC invocations=102 (full 1):
+ PSYoungGen      total 2793472K, used 2539K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bfb00000)
+  from space 2560K, 99% used [0x00000007bfb00000,0x00000007bfd7afe8,0x00000007bfd80000)
+  to   space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+ ParOldGen       total 5592576K, used 16037K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0fa9618,0x0000000715580000)
+ Metaspace       used 20922K, capacity 21104K, committed 21248K, reserved 1067008K
+  class space    used 3737K, capacity 3814K, committed 3840K, reserved 1048576K
+Event: 162,356 GC heap after
+Heap after GC invocations=102 (full 1):
+ PSYoungGen      total 2793472K, used 0K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bfb00000)
+  from space 2560K, 0% used [0x00000007bfb00000,0x00000007bfb00000,0x00000007bfd80000)
+  to   space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+ ParOldGen       total 5592576K, used 12922K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0c9eae8,0x0000000715580000)
+ Metaspace       used 20922K, capacity 21104K, committed 21248K, reserved 1067008K
+  class space    used 3737K, capacity 3814K, committed 3840K, reserved 1048576K
+}
+Event: 169,614 GC heap before
+{Heap before GC invocations=103 (full 1):
+ PSYoungGen      total 2793472K, used 525341K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2790912K, 18% used [0x0000000715580000,0x00000007356876a8,0x00000007bfb00000)
+  from space 2560K, 0% used [0x00000007bfb00000,0x00000007bfb00000,0x00000007bfd80000)
+  to   space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+ ParOldGen       total 5592576K, used 12922K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 0% used [0x00000005c0000000,0x00000005c0c9eae8,0x0000000715580000)
+ Metaspace       used 34942K, capacity 35127K, committed 35416K, reserved 1079296K
+  class space    used 5660K, capacity 5734K, committed 5760K, reserved 1048576K
+Event: 169,681 GC heap after
+Heap after GC invocations=103 (full 1):
+ PSYoungGen      total 2743296K, used 2542K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2740736K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bca00000)
+  from space 2560K, 99% used [0x00000007bfd80000,0x00000007bfffb8e8,0x00000007c0000000)
+  to   space 27648K, 0% used [0x00000007bca00000,0x00000007bca00000,0x00000007be500000)
+ ParOldGen       total 5592576K, used 76128K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 1% used [0x00000005c0000000,0x00000005c4a58010,0x0000000715580000)
+ Metaspace       used 34942K, capacity 35127K, committed 35416K, reserved 1079296K
+  class space    used 5660K, capacity 5734K, committed 5760K, reserved 1048576K
+}
+Event: 169,681 GC heap before
+{Heap before GC invocations=104 (full 2):
+ PSYoungGen      total 2743296K, used 2542K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2740736K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bca00000)
+  from space 2560K, 99% used [0x00000007bfd80000,0x00000007bfffb8e8,0x00000007c0000000)
+  to   space 27648K, 0% used [0x00000007bca00000,0x00000007bca00000,0x00000007be500000)
+ ParOldGen       total 5592576K, used 76128K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 1% used [0x00000005c0000000,0x00000005c4a58010,0x0000000715580000)
+ Metaspace       used 34942K, capacity 35127K, committed 35416K, reserved 1079296K
+  class space    used 5660K, capacity 5734K, committed 5760K, reserved 1048576K
+Event: 169,849 GC heap after
+Heap after GC invocations=104 (full 2):
+ PSYoungGen      total 2743296K, used 0K [0x0000000715580000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2740736K, 0% used [0x0000000715580000,0x0000000715580000,0x00000007bca00000)
+  from space 2560K, 0% used [0x00000007bfd80000,0x00000007bfd80000,0x00000007c0000000)
+  to   space 27648K, 0% used [0x00000007bca00000,0x00000007bca00000,0x00000007be500000)
+ ParOldGen       total 5592576K, used 72963K [0x00000005c0000000, 0x0000000715580000, 0x0000000715580000)
+  object space 5592576K, 1% used [0x00000005c0000000,0x00000005c4740e60,0x0000000715580000)
+ Metaspace       used 34942K, capacity 35127K, committed 35416K, reserved 1079296K
+  class space    used 5660K, capacity 5734K, committed 5760K, reserved 1048576K
+}
+
+Deoptimization events (10 events):
+Event: 174,634 Thread 0x00007fdc9c00f800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdc8ca3b84c method=sun.misc.URLClassPath$JarLoader.getResource(Ljava/lang/String;Z)Lsun/misc/Resource; @ 62
+Event: 174,634 Thread 0x00007fdc9c00f800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdc8c7c1b50 method=sun.misc.URLClassPath.getLoader(I)Lsun/misc/URLClassPath$Loader; @ 94
+Event: 174,635 Thread 0x00007fdc9c00f800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdc8c7c1b50 method=sun.misc.URLClassPath.getLoader(I)Lsun/misc/URLClassPath$Loader; @ 94
+Event: 174,635 Thread 0x00007fdc9c00f800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdc8c7c1b50 method=sun.misc.URLClassPath.getLoader(I)Lsun/misc/URLClassPath$Loader; @ 94
+Event: 174,635 Thread 0x00007fdc9c00f800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdc8d104954 method=java.net.URLClassLoader.defineClass(Ljava/lang/String;Lsun/misc/Resource;)Ljava/lang/Class; @ 21
+Event: 175,284 Thread 0x00007fdc9c00f800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdc8d288770 method=scala.collection.immutable.Range.<init>(III)V @ 74
+Event: 175,360 Thread 0x00007fdc9c366000 Uncommon trap: reason=null_check action=make_not_entrant pc=0x00007fdc8cb4a220 method=java.lang.StringCoding.deref(Ljava/lang/ThreadLocal;)Ljava/lang/Object; @ 4
+Event: 175,360 Thread 0x00007fdc9c366000 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdc8c937688 method=java.lang.ThreadLocal$ThreadLocalMap.set(Ljava/lang/ThreadLocal;Ljava/lang/Object;)V @ 36
+Event: 175,365 Thread 0x00007fdc9c00f800 Uncommon trap: reason=bimorphic action=maybe_recompile pc=0x00007fdc8cbc3768 method=scala.collection.IndexedSeqLike$class.iterator(Lscala/collection/IndexedSeqLike;)Lscala/collection/Iterator; @ 7
+Event: 176,589 Thread 0x00007fdc9c369800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdc8c7d84ac method=scala.runtime.BoxesRunTime.unboxToInt(Ljava/lang/Object;)I @ 1
+
+Internal exceptions (10 events):
+Event: 121,299 Thread 0x00007fdc9c00f800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007a7f0cf18) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/jvm.cpp, line 1386]
+Event: 121,299 Thread 0x00007fdc9c00f800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007a7f0e0e8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/jvm.cpp, line 1386]
+Event: 121,299 Thread 0x00007fdc9c00f800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007a7f0e4e0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/jvm.cpp, line 1386]
+Event: 121,299 Thread 0x00007fdc9c00f800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007a7f0f6b0) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/jvm.cpp, line 1386]
+Event: 121,299 Thread 0x00007fdc9c00f800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007a7f0faa8) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/jvm.cpp, line 1386]
+Event: 121,806 Thread 0x00007fdc9c00f800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000007a817c690) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/methodHandles.cpp, line 1146]
+Event: 121,807 Thread 0x00007fdc9c00f800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000007a818a218) thrown at [/HUDSON/workspace/8-2-build-linux-amd64/jdk8u92/6642/hotspot/src/share/vm/prims/methodHandles.cpp, line 1146]
+Event: 169,240 Thread 0x00007fdc9c00f800 Implicit null exception at 0x00007fdc8d2f4133 to 0x00007fdc8d2f43d1
+Event: 175,360 Thread 0x00007fdc9c366000 Implicit null exception at 0x00007fdc8cb49c96 to 0x00007fdc8cb4a209
+Event: 176,589 Thread 0x00007fdc9c369800 Implicit null exception at 0x00007fdc8c7d846c to 0x00007fdc8c7d849d
+
+Events (10 events):
+Event: 179,555 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d176150
+Event: 179,555 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d179090
+Event: 179,555 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d1954d0
+Event: 179,555 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d196810
+Event: 179,555 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d19b2d0
+Event: 179,556 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d20b510
+Event: 179,556 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d210d90
+Event: 179,556 Thread 0x00007fdc9c0be000 flushing nmethod 0x00007fdc8d250f50
+Event: 180,496 loading class Sync_Executable1$Result_x460_x453$
+Event: 180,496 loading class Sync_Executable1$Result_x460_x453$ done
+
+
+Dynamic libraries:
+00400000-00401000 r-xp 00000000 08:05 9835542                            /home/rofpga/OptiSDR2/jdk1.8.0_92/bin/java
+00600000-00601000 rw-p 00000000 08:05 9835542                            /home/rofpga/OptiSDR2/jdk1.8.0_92/bin/java
+01d45000-01d66000 rw-p 00000000 00:00 0                                  [heap]
+200000000-200100000 rw-s 1f0a95000 00:06 525                             /dev/nvidiactl
+200100000-200900000 ---p 00000000 00:00 0 
+200900000-200a00000 rw-s 41636000 00:06 525                              /dev/nvidiactl
+200a00000-200b00000 ---p 00000000 00:00 0 
+200b00000-200c00000 rw-s 1f0fd1000 00:06 525                             /dev/nvidiactl
+200c00000-200d00000 ---p 00000000 00:00 0 
+200d00000-280c50000 rw-s 00000000 00:05 92235                            /dev/zero (deleted)
+280c50000-500000000 ---p 00000000 00:00 0 
+5c0000000-7c06a0000 rw-p 00000000 00:00 0 
+7c06a0000-800000000 ---p 00000000 00:00 0 
+800000000-c00000000 ---p 00000000 00:00 0 
+7fdc08000000-7fdc0bf9a000 rw-p 00000000 00:00 0 
+7fdc0bf9a000-7fdc0c000000 ---p 00000000 00:00 0 
+7fdc0f85e000-7fdc10000000 rw-p 00000000 00:00 0 
+7fdc10000000-7fdc10021000 rw-p 00000000 00:00 0 
+7fdc10021000-7fdc14000000 ---p 00000000 00:00 0 
+7fdc14000000-7fdc14021000 rw-p 00000000 00:00 0 
+7fdc14021000-7fdc18000000 ---p 00000000 00:00 0 
+7fdc18000000-7fdc18021000 rw-p 00000000 00:00 0 
+7fdc18021000-7fdc1c000000 ---p 00000000 00:00 0 
+7fdc1c236000-7fdc1d91c000 rw-p 00000000 00:00 0 
+7fdc1d91c000-7fdc1d91d000 ---p 00000000 00:00 0 
+7fdc1d91d000-7fdc1e11d000 rw-p 00000000 00:00 0                          [stack:23422]
+7fdc1e11d000-7fdc1e11e000 ---p 00000000 00:00 0 
+7fdc1e11e000-7fdc1e91e000 rw-p 00000000 00:00 0                          [stack:23421]
+7fdc1e91e000-7fdc1e91f000 ---p 00000000 00:00 0 
+7fdc1e91f000-7fdc1f11f000 rw-p 00000000 00:00 0                          [stack:23420]
+7fdc1f11f000-7fdc1f120000 ---p 00000000 00:00 0 
+7fdc1f120000-7fdc1f920000 rw-p 00000000 00:00 0                          [stack:23419]
+7fdc1f920000-7fdc1f929000 r-xp 00000000 08:05 9835209                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libmanagement.so
+7fdc1f929000-7fdc1fb28000 ---p 00009000 08:05 9835209                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libmanagement.so
+7fdc1fb28000-7fdc1fb29000 rw-p 00008000 08:05 9835209                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libmanagement.so
+7fdc1fb29000-7fdc1fb6d000 r-xp 00000000 08:05 3018996                    /lib/x86_64-linux-gnu/libdbus-1.so.3.7.6
+7fdc1fb6d000-7fdc1fd6c000 ---p 00044000 08:05 3018996                    /lib/x86_64-linux-gnu/libdbus-1.so.3.7.6
+7fdc1fd6c000-7fdc1fd6d000 r--p 00043000 08:05 3018996                    /lib/x86_64-linux-gnu/libdbus-1.so.3.7.6
+7fdc1fd6d000-7fdc1fd6e000 rw-p 00044000 08:05 3018996                    /lib/x86_64-linux-gnu/libdbus-1.so.3.7.6
+7fdc1fd6e000-7fdc213da000 r-xp 00000000 08:05 6824404                    /usr/lib/x86_64-linux-gnu/libicudata.so.52.1
+7fdc213da000-7fdc215d9000 ---p 0166c000 08:05 6824404                    /usr/lib/x86_64-linux-gnu/libicudata.so.52.1
+7fdc215d9000-7fdc215da000 r--p 0166b000 08:05 6824404                    /usr/lib/x86_64-linux-gnu/libicudata.so.52.1
+7fdc215da000-7fdc215db000 rw-p 0166c000 08:05 6824404                    /usr/lib/x86_64-linux-gnu/libicudata.so.52.1
+7fdc215db000-7fdc23cb5000 r-xp 00000000 08:05 6826551                    /usr/local/cuda-6.5/targets/x86_64-linux/lib/libcufft.so.6.5.19
+7fdc23cb5000-7fdc23eb5000 ---p 026da000 08:05 6826551                    /usr/local/cuda-6.5/targets/x86_64-linux/lib/libcufft.so.6.5.19
+7fdc23eb5000-7fdc23f6c000 rw-p 026da000 08:05 6826551                    /usr/local/cuda-6.5/targets/x86_64-linux/lib/libcufft.so.6.5.19
+7fdc23f6c000-7fdc24000000 rw-p 00000000 00:00 0 
+7fdc24000000-7fdc24021000 rw-p 00000000 00:00 0 
+7fdc24021000-7fdc28000000 ---p 00000000 00:00 0 
+7fdc280a5000-7fdc280ad000 r-xp 00000000 08:05 3019044                    /lib/x86_64-linux-gnu/libnih-dbus.so.1.0.0
+7fdc280ad000-7fdc282ad000 ---p 00008000 08:05 3019044                    /lib/x86_64-linux-gnu/libnih-dbus.so.1.0.0
+7fdc282ad000-7fdc282ae000 r--p 00008000 08:05 3019044                    /lib/x86_64-linux-gnu/libnih-dbus.so.1.0.0
+7fdc282ae000-7fdc282af000 rw-p 00009000 08:05 3019044                    /lib/x86_64-linux-gnu/libnih-dbus.so.1.0.0
+7fdc282af000-7fdc282c6000 r-xp 00000000 08:05 3019046                    /lib/x86_64-linux-gnu/libnih.so.1.0.0
+7fdc282c6000-7fdc284c5000 ---p 00017000 08:05 3019046                    /lib/x86_64-linux-gnu/libnih.so.1.0.0
+7fdc284c5000-7fdc284c6000 r--p 00016000 08:05 3019046                    /lib/x86_64-linux-gnu/libnih.so.1.0.0
+7fdc284c6000-7fdc284c7000 rw-p 00017000 08:05 3019046                    /lib/x86_64-linux-gnu/libnih.so.1.0.0
+7fdc284c7000-7fdc284e0000 r-xp 00000000 08:05 3018987                    /lib/x86_64-linux-gnu/libcgmanager.so.0.0.0
+7fdc284e0000-7fdc286df000 ---p 00019000 08:05 3018987                    /lib/x86_64-linux-gnu/libcgmanager.so.0.0.0
+7fdc286df000-7fdc286e1000 r--p 00018000 08:05 3018987                    /lib/x86_64-linux-gnu/libcgmanager.so.0.0.0
+7fdc286e1000-7fdc286e2000 rw-p 0001a000 08:05 3018987                    /lib/x86_64-linux-gnu/libcgmanager.so.0.0.0
+7fdc286e2000-7fdc286f2000 r-xp 00000000 08:05 3019130                    /lib/x86_64-linux-gnu/libudev.so.1.3.5
+7fdc286f2000-7fdc288f1000 ---p 00010000 08:05 3019130                    /lib/x86_64-linux-gnu/libudev.so.1.3.5
+7fdc288f1000-7fdc288f2000 r--p 0000f000 08:05 3019130                    /lib/x86_64-linux-gnu/libudev.so.1.3.5
+7fdc288f2000-7fdc288f3000 rw-p 00010000 08:05 3019130                    /lib/x86_64-linux-gnu/libudev.so.1.3.5
+7fdc288f3000-7fdc28aeb000 r-xp 00000000 08:05 6824406                    /usr/lib/x86_64-linux-gnu/libicui18n.so.52.1
+7fdc28aeb000-7fdc28ceb000 ---p 001f8000 08:05 6824406                    /usr/lib/x86_64-linux-gnu/libicui18n.so.52.1
+7fdc28ceb000-7fdc28cf8000 r--p 001f8000 08:05 6824406                    /usr/lib/x86_64-linux-gnu/libicui18n.so.52.1
+7fdc28cf8000-7fdc28cf9000 rw-p 00205000 08:05 6824406                    /usr/lib/x86_64-linux-gnu/libicui18n.so.52.1
+7fdc28cf9000-7fdc28cfa000 rw-p 00000000 00:00 0 
+7fdc28cfa000-7fdc28e5e000 r-xp 00000000 08:05 6824418                    /usr/lib/x86_64-linux-gnu/libicuuc.so.52.1
+7fdc28e5e000-7fdc2905d000 ---p 00164000 08:05 6824418                    /usr/lib/x86_64-linux-gnu/libicuuc.so.52.1
+7fdc2905d000-7fdc2906e000 r--p 00163000 08:05 6824418                    /usr/lib/x86_64-linux-gnu/libicuuc.so.52.1
+7fdc2906e000-7fdc2906f000 rw-p 00174000 08:05 6824418                    /usr/lib/x86_64-linux-gnu/libicuuc.so.52.1
+7fdc2906f000-7fdc29073000 rw-p 00000000 00:00 0 
+7fdc29073000-7fdc29088000 r-xp 00000000 08:05 3019136                    /lib/x86_64-linux-gnu/libusb-1.0.so.0.1.0
+7fdc29088000-7fdc29288000 ---p 00015000 08:05 3019136                    /lib/x86_64-linux-gnu/libusb-1.0.so.0.1.0
+7fdc29288000-7fdc29289000 r--p 00015000 08:05 3019136                    /lib/x86_64-linux-gnu/libusb-1.0.so.0.1.0
+7fdc29289000-7fdc2928a000 rw-p 00016000 08:05 3019136                    /lib/x86_64-linux-gnu/libusb-1.0.so.0.1.0
+7fdc2928a000-7fdc292f1000 r-xp 00000000 08:05 6828470                    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.54.0
+7fdc292f1000-7fdc294f0000 ---p 00067000 08:05 6828470                    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.54.0
+7fdc294f0000-7fdc294f4000 r--p 00066000 08:05 6828470                    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.54.0
+7fdc294f4000-7fdc294f5000 rw-p 0006a000 08:05 6828470                    /usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.54.0
+7fdc294f5000-7fdc295f6000 r-xp 00000000 08:05 6828507                    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.54.0
+7fdc295f6000-7fdc297f5000 ---p 00101000 08:05 6828507                    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.54.0
+7fdc297f5000-7fdc297fa000 r--p 00100000 08:05 6828507                    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.54.0
+7fdc297fa000-7fdc297fb000 rw-p 00105000 08:05 6828507                    /usr/lib/x86_64-linux-gnu/libboost_regex.so.1.54.0
+7fdc297fb000-7fdc297fc000 rw-p 00000000 00:00 0 
+7fdc297fc000-7fdc29811000 r-xp 00000000 08:05 6828468                    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.54.0
+7fdc29811000-7fdc29a10000 ---p 00015000 08:05 6828468                    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.54.0
+7fdc29a10000-7fdc29a11000 r--p 00014000 08:05 6828468                    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.54.0
+7fdc29a11000-7fdc29a12000 rw-p 00015000 08:05 6828468                    /usr/lib/x86_64-linux-gnu/libboost_filesystem.so.1.54.0
+7fdc29a12000-7fdc29a21000 r-xp 00000000 08:05 6823963                    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.54.0
+7fdc29a21000-7fdc29c21000 ---p 0000f000 08:05 6823963                    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.54.0
+7fdc29c21000-7fdc29c22000 r--p 0000f000 08:05 6823963                    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.54.0
+7fdc29c22000-7fdc29c23000 rw-p 00010000 08:05 6823963                    /usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.54.0
+7fdc29c23000-7fdc29c39000 r-xp 00000000 08:05 3019009                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fdc29c39000-7fdc29e38000 ---p 00016000 08:05 3019009                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fdc29e38000-7fdc29e39000 rw-p 00015000 08:05 3019009                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fdc29e39000-7fdc29e46000 r-xp 00000000 08:05 6818629                    /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+7fdc29e46000-7fdc2a046000 ---p 0000d000 08:05 6818629                    /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+7fdc2a046000-7fdc2a047000 r--p 0000d000 08:05 6818629                    /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+7fdc2a047000-7fdc2a048000 rw-p 0000e000 08:05 6818629                    /usr/lib/x86_64-linux-gnu/libgomp.so.1.0.0
+7fdc2a048000-7fdc2a12e000 r-xp 00000000 08:05 6815922                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19
+7fdc2a12e000-7fdc2a32d000 ---p 000e6000 08:05 6815922                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19
+7fdc2a32d000-7fdc2a335000 r--p 000e5000 08:05 6815922                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19
+7fdc2a335000-7fdc2a337000 rw-p 000ed000 08:05 6815922                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.19
+7fdc2a337000-7fdc2a34c000 rw-p 00000000 00:00 0 
+7fdc2a34c000-7fdc2a360000 r-xp 00000000 08:05 6828510                    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+7fdc2a360000-7fdc2a55f000 ---p 00014000 08:05 6828510                    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+7fdc2a55f000-7fdc2a561000 r--p 00013000 08:05 6828510                    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+7fdc2a561000-7fdc2a562000 rw-p 00015000 08:05 6828510                    /usr/lib/x86_64-linux-gnu/libboost_thread.so.1.54.0
+7fdc2a562000-7fdc2bde4000 r-xp 00000000 08:05 6826537                    /usr/local/cuda-6.5/targets/x86_64-linux/lib/libcublas.so.6.5.19
+7fdc2bde4000-7fdc2bfe4000 ---p 01882000 08:05 6826537                    /usr/local/cuda-6.5/targets/x86_64-linux/lib/libcublas.so.6.5.19
+7fdc2bfe4000-7fdc2bff4000 rw-p 01882000 08:05 6826537                    /usr/local/cuda-6.5/targets/x86_64-linux/lib/libcublas.so.6.5.19
+7fdc2bff4000-7fdc2c000000 rw-p 00000000 00:00 0 
+7fdc2c000000-7fdc2c021000 rw-p 00000000 00:00 0 
+7fdc2c021000-7fdc30000000 ---p 00000000 00:00 0 
+7fdc30000000-7fdc30021000 rw-p 00000000 00:00 0 
+7fdc30021000-7fdc34000000 ---p 00000000 00:00 0 
+7fdc34000000-7fdc34047000 rw-p 00000000 00:00 0 
+7fdc34047000-7fdc38000000 ---p 00000000 00:00 0 
+7fdc38000000-7fdc3bfff000 rw-p 00000000 00:00 0 
+7fdc3bfff000-7fdc3c000000 ---p 00000000 00:00 0 
+7fdc3c000000-7fdc3c021000 rw-p 00000000 00:00 0 
+7fdc3c021000-7fdc40000000 ---p 00000000 00:00 0 
+7fdc40000000-7fdc40021000 rw-p 00000000 00:00 0 
+7fdc40021000-7fdc44000000 ---p 00000000 00:00 0 
+7fdc44000000-7fdc4538c000 rw-p 00000000 00:00 0 
+7fdc4538c000-7fdc48000000 ---p 00000000 00:00 0 
+7fdc48000000-7fdc490df000 rw-p 00000000 00:00 0 
+7fdc490df000-7fdc4c000000 ---p 00000000 00:00 0 
+7fdc4c000000-7fdc4c021000 rw-p 00000000 00:00 0 
+7fdc4c021000-7fdc50000000 ---p 00000000 00:00 0 
+7fdc50000000-7fdc517d4000 rw-p 00000000 00:00 0 
+7fdc517d4000-7fdc54000000 ---p 00000000 00:00 0 
+7fdc54000000-7fdc54021000 rw-p 00000000 00:00 0 
+7fdc54021000-7fdc58000000 ---p 00000000 00:00 0 
+7fdc58000000-7fdc58021000 rw-p 00000000 00:00 0 
+7fdc58021000-7fdc5c000000 ---p 00000000 00:00 0 
+7fdc5c000000-7fdc5c021000 rw-p 00000000 00:00 0 
+7fdc5c021000-7fdc60000000 ---p 00000000 00:00 0 
+7fdc60000000-7fdc600c9000 rw-p 00000000 00:00 0 
+7fdc600c9000-7fdc64000000 ---p 00000000 00:00 0 
+7fdc64000000-7fdc64021000 rw-p 00000000 00:00 0 
+7fdc64021000-7fdc68000000 ---p 00000000 00:00 0 
+7fdc680f5000-7fdc680f6000 rw-p 00000000 00:00 0 
+7fdc680f6000-7fdc680f9000 r-xp 00000000 08:05 6823964                    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
+7fdc680f9000-7fdc682f8000 ---p 00003000 08:05 6823964                    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
+7fdc682f8000-7fdc682f9000 r--p 00002000 08:05 6823964                    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
+7fdc682f9000-7fdc682fa000 rw-p 00003000 08:05 6823964                    /usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
+7fdc682fa000-7fdc68a4d000 r-xp 00000000 08:05 7217194                    /usr/local/lib/libuhd.so.003.010
+7fdc68a4d000-7fdc68c4c000 ---p 00753000 08:05 7217194                    /usr/local/lib/libuhd.so.003.010
+7fdc68c4c000-7fdc68c79000 r--p 00752000 08:05 7217194                    /usr/local/lib/libuhd.so.003.010
+7fdc68c79000-7fdc68c7d000 rw-p 0077f000 08:05 7217194                    /usr/local/lib/libuhd.so.003.010
+7fdc68c7d000-7fdc68c82000 rw-p 00000000 00:00 0 
+7fdc68c82000-7fdc68ceb000 r-xp 00000000 08:05 6828539                    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.54.0
+7fdc68ceb000-7fdc68eeb000 ---p 00069000 08:05 6828539                    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.54.0
+7fdc68eeb000-7fdc68eef000 r--p 00069000 08:05 6828539                    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.54.0
+7fdc68eef000-7fdc68ef0000 rw-p 0006d000 08:05 6828539                    /usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.54.0
+7fdc68f08000-7fdc68f0f000 r--s 00000000 08:05 7215768                    /usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache
+7fdc68f0f000-7fdc68fed000 r-xp 00000000 08:05 9699554                    /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so
+7fdc68fed000-7fdc691ed000 ---p 000de000 08:05 9699554                    /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so
+7fdc691ed000-7fdc691f2000 r--p 000de000 08:05 9699554                    /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so
+7fdc691f2000-7fdc691f4000 rw-p 000e3000 08:05 9699554                    /home/rofpga/OptiSDR2/Delite/generatedCache/cuda/bin/runtime/cudaHostUSRPApp3.so
+7fdc691f4000-7fdc692b5000 rw-p 00000000 00:00 0 
+7fdc692b5000-7fdc693f5000 ---p 00000000 00:00 0 
+7fdc693f5000-7fdc695f5000 rw-p 00000000 00:00 0 
+7fdc695f5000-7fdc695f9000 r--s 00097000 08:05 9835304                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/jsse.jar
+7fdc695f9000-7fdc697f9000 rw-p 00000000 00:00 0 
+7fdc697f9000-7fdc699ef000 rw-p 00000000 00:00 0 
+7fdc699ef000-7fdc699f9000 ---p 00000000 00:00 0 
+7fdc699f9000-7fdc69bf9000 rw-p 00000000 00:00 0 
+7fdc69bf9000-7fdc69df9000 rw-p 00000000 00:00 0 
+7fdc69df9000-7fdc69ff9000 rw-p 00000000 00:00 0 
+7fdc69ff9000-7fdc6a1f9000 rw-p 00000000 00:00 0 
+7fdc6a1f9000-7fdc6a3f9000 rw-p 00000000 00:00 0 
+7fdc6a3f9000-7fdc6a3fd000 r--s 0003a000 08:05 9835365                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/sunpkcs11.jar
+7fdc6a3fd000-7fdc6a3ff000 r--s 00001000 08:05 9835361                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/dnsns.jar
+7fdc6a3ff000-7fdc6a409000 r--s 00116000 08:05 9835366                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/localedata.jar
+7fdc6a409000-7fdc6a40a000 r--s 00009000 08:05 9835363                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/sunec.jar
+7fdc6a40a000-7fdc6a40b000 r--s 00010000 08:05 9835367                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/zipfs.jar
+7fdc6a40b000-7fdc6a426000 r--s 001d2000 08:05 9835357                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/nashorn.jar
+7fdc6a426000-7fdc6a4bc000 r--s 01102000 08:05 9835364                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/jfxrt.jar
+7fdc6a4bc000-7fdc6a4bd000 r--s 0000a000 08:05 9835358                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/jaccess.jar
+7fdc6a4bd000-7fdc6a4d9000 r--s 00393000 08:05 9835360                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/cldrdata.jar
+7fdc6a4d9000-7fdc6a4df000 r--s 0003f000 08:05 9835362                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/ext/sunjce_provider.jar
+7fdc6a4df000-7fdc6a4e4000 r--s 00084000 08:05 9835294                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/jfr.jar
+7fdc6a4e4000-7fdc6a4e9000 r--s 002f9000 08:05 9835313                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/charsets.jar
+7fdc6a4e9000-7fdc6a4ec000 r--s 0001a000 08:05 9835297                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/jce.jar
+7fdc6a4ec000-7fdc6a4f0000 r--s 00097000 08:05 9835304                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/jsse.jar
+7fdc6a4f0000-7fdc6a503000 r--s 00344000 08:05 9835285                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/resources.jar
+7fdc6a503000-7fdc6a703000 rw-p 00000000 00:00 0 
+7fdc6a703000-7fdc6a903000 rw-p 00000000 00:00 0 
+7fdc6a903000-7fdc6a906000 ---p 00000000 00:00 0 
+7fdc6a906000-7fdc6ab3c000 rw-p 00000000 00:00 0                          [stack:22671]
+7fdc6ab3c000-7fdc6ab40000 r--s 00020000 08:05 9572654                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-digester/commons-digester/commons-digester-1.8.jar
+7fdc6ab40000-7fdc6ab42000 r--s 00005000 08:05 9572564                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/stax/stax-api/stax-api-1.0.1.jar
+7fdc6ab42000-7fdc6ab45000 r--s 00019000 08:05 9572533                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-el/commons-el/commons-el-1.0.jar
+7fdc6ab45000-7fdc6ab53000 r--s 0007f000 08:05 9572657                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-collections/commons-collections/commons-collections-3.2.1.jar
+7fdc6ab53000-7fdc6ab55000 r--s 00012000 08:05 9572549                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.spire-math/spire-macros_2.10/spire-macros_2.10-0.7.4.jar
+7fdc6ab55000-7fdc6aba9000 r--s 00697000 08:05 9572547                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.spire-math/spire_2.10/spire_2.10-0.7.4.jar
+7fdc6aba9000-7fdc6ac0b000 r--s 0067c000 08:05 9572669                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scalatest/scalatest_2.10/scalatest_2.10-2.1.2.jar
+7fdc6ac0b000-7fdc6ac16000 r--s 000b0000 08:05 9572604                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.rwl/jtransforms/jtransforms-2.4.0.jar
+7fdc6ac16000-7fdc6ac1a000 r--s 0002f000 08:05 9572675                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-beanutils/commons-beanutils-core/commons-beanutils-core-1.8.0.jar
+7fdc6ac1a000-7fdc6ac1f000 r--s 0002a000 08:05 9572677                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-beanutils/commons-beanutils/commons-beanutils-1.7.0.jar
+7fdc6ac1f000-7fdc6ac20000 r--s 00232000 08:05 9572514                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_ref-win-x86_64/netlib-native_ref-win-x86_64-1.1-natives.jar
+7fdc6ac20000-7fdc6ac22000 r--s 001aa000 08:05 9572508                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_ref-linux-x86_64/netlib-native_ref-linux-x86_64-1.1-natives.jar
+7fdc6ac22000-7fdc6ac23000 r--s 0000d000 08:05 9572530                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/native_ref-java/native_ref-java-1.1.jar
+7fdc6ac23000-7fdc6ac24000 r--s 001bd000 08:05 9572528                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_ref-win-i686/netlib-native_ref-win-i686-1.1-natives.jar
+7fdc6ac24000-7fdc6ac26000 r--s 00088000 08:05 9572518                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_system-win-i686/netlib-native_system-win-i686-1.1-natives.jar
+7fdc6ac26000-7fdc6ac27000 r--s 00126000 08:05 9572522                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_ref-linux-armhf/netlib-native_ref-linux-armhf-1.1-natives.jar
+7fdc6ac27000-7fdc6ac28000 r--s 0000d000 08:05 9572516                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/native_system-java/native_system-java-1.1.jar
+7fdc6ac28000-7fdc6ac29000 r--s 0009b000 08:05 9572524                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_system-win-x86_64/netlib-native_system-win-x86_64-1.1-natives.jar
+7fdc6ac29000-7fdc6ac2b000 r--s 001c0000 08:05 9572512                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_ref-osx-x86_64/netlib-native_ref-osx-x86_64-1.1-natives.jar
+7fdc6ac2b000-7fdc6ac2c000 r--s 0004b000 08:05 9572510                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_system-linux-armhf/netlib-native_system-linux-armhf-1.1-natives.jar
+7fdc6ac2c000-7fdc6ac2d000 r--s 0016b000 08:05 9572504                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_ref-linux-i686/netlib-native_ref-linux-i686-1.1-natives.jar
+7fdc6ac2d000-7fdc6ac2e000 r--s 0006a000 08:05 9572520                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_system-linux-i686/netlib-native_system-linux-i686-1.1-natives.jar
+7fdc6ac2e000-7fdc6ac2f000 r--s 00087000 08:05 9572526                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_system-osx-x86_64/netlib-native_system-osx-x86_64-1.1-natives.jar
+7fdc6ac2f000-7fdc6ac30000 r--s 0006f000 08:05 9572502                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/netlib-native_system-linux-x86_64/netlib-native_system-linux-x86_64-1.1-natives.jar
+7fdc6ac30000-7fdc6ac32000 r--s 00027000 08:05 9572506                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil.netlib/core/core-1.1.2.jar
+7fdc6ac32000-7fdc6ac44000 r--s 00112000 08:05 9572495                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/net.sourceforge.f2j/arpack_combined_all/arpack_combined_all-0.1.jar
+7fdc6ac44000-7fdc6ac6e000 r--s 0058a000 08:05 9572496                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/net.sourceforge.f2j/arpack_combined_all/arpack_combined_all-0.1-javadoc.jar
+7fdc6ac6e000-7fdc6ac7a000 r--s 00105000 08:05 9572636                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.lowagie/itext/itext-2.1.5.jar
+7fdc6ac7a000-7fdc6ac80000 r--s 00034000 08:05 9572561                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/junit/junit/junit-4.8.2.jar
+7fdc6ac80000-7fdc6ac85000 r--s 0004a000 08:05 9572610                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/net.java.dev.jets3t/jets3t/jets3t-0.6.1.jar
+7fdc6ac85000-7fdc6ac87000 r--s 00005000 08:05 9572536                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.slf4j/slf4j-api/slf4j-api-1.7.5.jar
+7fdc6ac87000-7fdc6aca5000 r--s 00180000 08:05 9572613                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.apache.commons/commons-math3/commons-math3-3.2.jar
+7fdc6aca5000-7fdc6acb8000 r--s 000df000 08:05 9572615                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.apache.commons/commons-math/commons-math-2.2.jar
+7fdc6acb8000-7fdc6acb9000 r--s 00003000 08:05 9572592                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/xmlenc/xmlenc/xmlenc-0.52.jar
+7fdc6acb9000-7fdc6acc4000 r--s 00079000 08:05 9572567                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/net.sf.jchart2d/jchart2d/jchart2d-3.3.2.jar
+7fdc6acc4000-7fdc6acfa000 r--s 0025e000 08:05 9572573                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/EPFL/lms_2.10/lms_2.10-0.3-SNAPSHOT.jar
+7fdc6acfa000-7fdc6acfb000 r--s 00000000 08:05 9572589                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/default/target_2.10/target_2.10-0.1-SNAPSHOT.jar
+7fdc6acfb000-7fdc6acfd000 r--s 00005000 08:05 9572587                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/default/swing_2.10/swing_2.10-0.1-SNAPSHOT.jar
+7fdc6acfd000-7fdc6ad0a000 r--s 00097000 08:05 9572686                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.codehaus.jackson/jackson-mapper-asl/jackson-mapper-asl-1.8.8.jar
+7fdc6ad0a000-7fdc6ad0b000 r--s 00007000 08:05 9572684                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.codehaus.jackson/jackson-xc/jackson-xc-1.7.1.jar
+7fdc6ad0b000-7fdc6ad0d000 r--s 00003000 08:05 9572680                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.codehaus.jackson/jackson-jaxrs/jackson-jaxrs-1.7.1.jar
+7fdc6ad0d000-7fdc6ad11000 r--s 00034000 08:05 9572682                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.codehaus.jackson/jackson-core-asl/jackson-core-asl-1.8.8.jar
+7fdc6ad11000-7fdc6ad34000 r--s 00344000 08:05 9572663                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.eclipse.jdt/core/core-3.1.1.jar
+7fdc6ad34000-7fdc6ad37000 r--s 00018000 08:05 9572544                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.fusesource.jansi/jansi/jansi-1.4.jar
+7fdc6ad37000-7fdc6ad39000 r--s 0000d000 08:05 9572499                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-logging/commons-logging/commons-logging-1.1.1.jar
+7fdc6ad39000-7fdc6ad42000 r--s 000a4000 08:05 9572618                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/hsqldb/hsqldb/hsqldb-1.8.0.10.jar
+7fdc6ad42000-7fdc6ad4c000 r--s 00075000 08:05 9572595                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.apache.xmlgraphics/xmlgraphics-commons/xmlgraphics-commons-1.3.1.jar
+7fdc6ad4c000-7fdc6ad4e000 r--s 0000e000 08:05 9572642                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/oro/oro/oro-2.0.8.jar
+7fdc6ad4e000-7fdc6ad88000 r--s 003c8000 08:05 9572660                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.apache.hadoop/hadoop-core/hadoop-core-1.2.0.jar
+7fdc6ad88000-7fdc6adae000 r--s 0024c000 08:05 9572705                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.typesafe.akka/akka-actor_2.10/akka-actor_2.10-2.2-M3.jar
+7fdc6adae000-7fdc6adb3000 r--s 00028000 08:05 9572584                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-net/commons-net/commons-net-1.4.1.jar
+7fdc6adb3000-7fdc6adb5000 r--s 0000d000 08:05 9572601                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-codec/commons-codec/commons-codec-1.4.jar
+7fdc6adb5000-7fdc6adb9000 r--s 0003c000 08:05 9572645                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-lang/commons-lang/commons-lang-2.4.jar
+7fdc6adb9000-7fdc6adbc000 r--s 00017000 08:05 9572672                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/javax.xml.bind/jaxb-api/jaxb-api-2.2.2.jar
+7fdc6adbc000-7fdc6adc1000 r--s 0005e000 08:05 9572623                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/tomcat/jasper-compiler/jasper-compiler-5.5.12.jar
+7fdc6adc1000-7fdc6ae96000 r--s 00c3a000 08:05 9572633                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scalanlp/breeze_2.10/breeze_2.10-0.11.2.jar
+7fdc6ae96000-7fdc6ae9c000 r--s 00043000 08:05 9572598                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-configuration/commons-configuration/commons-configuration-1.6.jar
+7fdc6ae9c000-7fdc6aeb5000 r--s 00178000 08:05 9572648                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.jidesoft/jide-oss/jide-oss-2.4.8.jar
+7fdc6aeb5000-7fdc6aec8000 r--s 000c7000 08:05 9572581                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.sun.xml.bind/jaxb-impl/jaxb-impl-2.2.3-1.jar
+7fdc6aec8000-7fdc6aed7000 r--s 000ee000 08:05 9572483                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/ant/ant/ant-1.6.5.jar
+7fdc6aed7000-7fdc6b0d7000 rw-p 00000000 00:00 0 
+7fdc6b0d7000-7fdc6b0e8000 r-xp 00000000 08:05 9835214                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libnio.so
+7fdc6b0e8000-7fdc6b2e7000 ---p 00011000 08:05 9835214                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libnio.so
+7fdc6b2e7000-7fdc6b2e8000 rw-p 00010000 08:05 9835214                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libnio.so
+7fdc6b2e8000-7fdc6b2fe000 r-xp 00000000 08:05 9835178                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libnet.so
+7fdc6b2fe000-7fdc6b4fe000 ---p 00016000 08:05 9835178                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libnet.so
+7fdc6b4fe000-7fdc6b4ff000 rw-p 00016000 08:05 9835178                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libnet.so
+7fdc6b4ff000-7fdc6b6ff000 rw-p 00000000 00:00 0 
+7fdc6b6ff000-7fdc6b7ff000 rw-s 1f5c72000 00:06 525                       /dev/nvidiactl
+7fdc6b7ff000-7fdc6b800000 ---p 00000000 00:00 0 
+7fdc6b800000-7fdc6c000000 rw-p 00000000 00:00 0                          [stack:22669]
+7fdc6c000000-7fdc6c021000 rw-p 00000000 00:00 0 
+7fdc6c021000-7fdc70000000 ---p 00000000 00:00 0 
+7fdc70000000-7fdc70001000 r--s 0000a000 08:05 9572486                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/asm/asm/asm-3.1.jar
+7fdc70001000-7fdc70003000 r--s 00011000 08:05 9572621                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/tomcat/jasper-runtime/jasper-runtime-5.5.12.jar
+7fdc70003000-7fdc70005000 r--s 0001b000 08:05 9572629                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scalanlp/breeze-macros_2.10/breeze-macros_2.10-0.11.2.jar
+7fdc70005000-7fdc70007000 r--s 00009000 08:05 9572492                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-cli/commons-cli/commons-cli-1.2.jar
+7fdc70007000-7fdc7000d000 r--s 00068000 08:05 9572689                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.google.protobuf/protobuf-java/protobuf-java-2.4.1.jar
+7fdc7000d000-7fdc70010000 r--s 0003f000 08:05 9572651                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.apache.mesos/mesos/mesos-0.9.0-incubating.jar
+7fdc70010000-7fdc70015000 r--s 00040000 08:05 9572626                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-httpclient/commons-httpclient/commons-httpclient-3.0.1.jar
+7fdc70015000-7fdc70022000 r--s 000a4000 08:05 9572709                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scalamacros/quasiquotes_2.10/quasiquotes_2.10-2.0.0.jar
+7fdc70022000-7fdc70024000 r--s 00004000 08:05 9572489                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/javax.xml.stream/stax-api/stax-api-1.0-2.jar
+7fdc70024000-7fdc70035000 r--s 000ea000 08:05 9572694                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jsp-2.1/jsp-2.1-6.1.14.jar
+7fdc70035000-7fdc700b7000 rw-s af425000 00:06 525                        /dev/nvidiactl
+7fdc700b7000-7fdc701b7000 rw-s 06bca000 00:06 525                        /dev/nvidiactl
+7fdc701b7000-7fdc702b7000 rw-s a6e95000 00:06 525                        /dev/nvidiactl
+7fdc702b7000-7fdc706b7000 rw-s 1f0956000 00:06 525                       /dev/nvidiactl
+7fdc706b7000-7fdc70ab7000 rw-s 8607e000 00:06 525                        /dev/nvidiactl
+7fdc70ab7000-7fdc70ab8000 ---p 00000000 00:00 0 
+7fdc70ab8000-7fdc712b8000 rw-p 00000000 00:00 0                          [stack:22668]
+7fdc712b8000-7fdc71e9a000 r-xp 00000000 08:05 6827723                    /usr/lib/x86_64-linux-gnu/libcuda.so.352.93
+7fdc71e9a000-7fdc72099000 ---p 00be2000 08:05 6827723                    /usr/lib/x86_64-linux-gnu/libcuda.so.352.93
+7fdc72099000-7fdc72257000 rw-p 00be1000 08:05 6827723                    /usr/lib/x86_64-linux-gnu/libcuda.so.352.93
+7fdc72257000-7fdc7226d000 rw-p 00000000 00:00 0 
+7fdc7226d000-7fdc7226e000 r--s 00000000 08:05 9572631                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scalanlp/breeze-natives_2.10/breeze-natives_2.10-0.11.2.jar
+7fdc7226e000-7fdc72270000 r--s 0000e000 08:05 9572607                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/javax.activation/activation/activation-1.1.jar
+7fdc72270000-7fdc72271000 r--s 00004000 08:05 9572639                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/net.sf.opencsv/opencsv/opencsv-2.3.jar
+7fdc72271000-7fdc72278000 r--s 0007d000 08:05 9572700                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jetty/jetty-6.1.26.jar
+7fdc72278000-7fdc7227c000 r--s 00028000 08:05 9572692                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jetty-util/jetty-util-6.1.26.jar
+7fdc7227c000-7fdc7227f000 r--s 0001e000 08:05 9572698                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jsp-api-2.1/jsp-api-2.1-6.1.14.jar
+7fdc7227f000-7fdc72282000 r--s 0001e000 08:05 9572702                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/servlet-api-2.5/servlet-api-2.5-6.1.14.jar
+7fdc72282000-7fdc72284000 r--s 0001f000 08:05 9572696                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/servlet-api/servlet-api-2.5-20081211.jar
+7fdc72284000-7fdc72288000 rw-s c0240000 00:06 433                        /dev/nvidia0
+7fdc72288000-7fdc7228c000 rw-s c0220000 00:06 433                        /dev/nvidia0
+7fdc7228c000-7fdc7228f000 ---p 00000000 00:00 0 
+7fdc7228f000-7fdc7238d000 rw-p 00000000 00:00 0                          [stack:22667]
+7fdc7238d000-7fdc72390000 ---p 00000000 00:00 0 
+7fdc72390000-7fdc7248e000 rw-p 00000000 00:00 0                          [stack:22666]
+7fdc7248e000-7fdc724ef000 r-xp 00000000 08:05 9572206                    /home/rofpga/OptiSDR2/Delite/runtime/src/static/cuda/cudaInit.so
+7fdc724ef000-7fdc726ee000 ---p 00061000 08:05 9572206                    /home/rofpga/OptiSDR2/Delite/runtime/src/static/cuda/cudaInit.so
+7fdc726ee000-7fdc726f1000 r--p 00060000 08:05 9572206                    /home/rofpga/OptiSDR2/Delite/runtime/src/static/cuda/cudaInit.so
+7fdc726f1000-7fdc726f2000 rw-p 00063000 08:05 9572206                    /home/rofpga/OptiSDR2/Delite/runtime/src/static/cuda/cudaInit.so
+7fdc726f2000-7fdc726f3000 rw-p 00000000 00:00 0 
+7fdc726f3000-7fdc727f2000 r--s 00cdd000 08:05 9572558                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/scala-compiler/scala-compiler-2.10.2.jar
+7fdc727f2000-7fdc72865000 r--s 0065e000 08:05 9572552                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/scala-library/scala-library-2.10.2.jar
+7fdc72865000-7fdc7289a000 r--s 002d3000 08:05 9572554                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/scala-reflect/scala-reflect-2.10.2.jar
+7fdc7289a000-7fdc728ab000 r--s 00099000 08:05 9572467                    /home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.sun.jersey/jersey-server/jersey-server-1.8.jar
+7fdc728ab000-7fdc728ac000 ---p 00000000 00:00 0 
+7fdc728ac000-7fdc729ac000 rw-p 00000000 00:00 0                          [stack:22665]
+7fdc729ac000-7fdc729af000 ---p 00000000 00:00 0 
+7fdc729af000-7fdc72aad000 rw-p 00000000 00:00 0                          [stack:22664]
+7fdc72aad000-7fdc72ab0000 ---p 00000000 00:00 0 
+7fdc72ab0000-7fdc72bae000 rw-p 00000000 00:00 0                          [stack:22663]
+7fdc72bae000-7fdc72bb1000 ---p 00000000 00:00 0 
+7fdc72bb1000-7fdc72caf000 rw-p 00000000 00:00 0                          [stack:22662]
+7fdc72caf000-7fdc72cb2000 ---p 00000000 00:00 0 
+7fdc72cb2000-7fdc72db0000 rw-p 00000000 00:00 0                          [stack:22661]
+7fdc72db0000-7fdc72db3000 ---p 00000000 00:00 0 
+7fdc72db3000-7fdc72eb1000 rw-p 00000000 00:00 0                          [stack:22660]
+7fdc72eb1000-7fdc73593000 r--p 00000000 08:05 6822819                    /usr/lib/locale/locale-archive
+7fdc73593000-7fdc73596000 ---p 00000000 00:00 0 
+7fdc73596000-7fdc73694000 rw-p 00000000 00:00 0                          [stack:22659]
+7fdc73694000-7fdc73697000 ---p 00000000 00:00 0 
+7fdc73697000-7fdc73795000 rw-p 00000000 00:00 0                          [stack:22658]
+7fdc73795000-7fdc73796000 ---p 00000000 00:00 0 
+7fdc73796000-7fdc74000000 rw-p 00000000 00:00 0                          [stack:22657]
+7fdc74000000-7fdc74021000 rw-p 00000000 00:00 0 
+7fdc74021000-7fdc78000000 ---p 00000000 00:00 0 
+7fdc78000000-7fdc78001000 rw-s cfd63000 00:06 433                        /dev/nvidia0
+7fdc78001000-7fdc78002000 rw-s 1d3c75000 00:06 525                       /dev/nvidiactl
+7fdc78002000-7fdc78003000 rw-s cfd63000 00:06 433                        /dev/nvidia0
+7fdc78003000-7fdc78007000 r--s 00025000 08:05 9572556                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/jline/jline-2.10.2.jar
+7fdc78007000-7fdc78018000 r--s 0014c000 08:05 9572539                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/jfree/jfreechart/jfreechart-1.0.13.jar
+7fdc78018000-7fdc78890000 rw-p 00000000 00:00 0 
+7fdc78890000-7fdc78a69000 r--s 03d24000 08:05 9835319                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/rt.jar
+7fdc78a69000-7fdc8a33a000 rw-p 00000000 00:00 0 
+7fdc8a33a000-7fdc8a33b000 ---p 00000000 00:00 0 
+7fdc8a33b000-7fdc8a43b000 rw-p 00000000 00:00 0                          [stack:22656]
+7fdc8a43b000-7fdc8a43c000 ---p 00000000 00:00 0 
+7fdc8a43c000-7fdc8a53c000 rw-p 00000000 00:00 0                          [stack:22655]
+7fdc8a53c000-7fdc8a53d000 ---p 00000000 00:00 0 
+7fdc8a53d000-7fdc8a63d000 rw-p 00000000 00:00 0                          [stack:22654]
+7fdc8a63d000-7fdc8a63e000 ---p 00000000 00:00 0 
+7fdc8a63e000-7fdc8c27b000 rw-p 00000000 00:00 0                          [stack:22653]
+7fdc8c27b000-7fdc8c5aa000 ---p 00000000 00:00 0 
+7fdc8c5aa000-7fdc8e9ca000 rwxp 00000000 00:00 0 
+7fdc8e9ca000-7fdc9b5aa000 ---p 00000000 00:00 0 
+7fdc9b5aa000-7fdc9b5c4000 r-xp 00000000 08:05 9835188                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libzip.so
+7fdc9b5c4000-7fdc9b7c4000 ---p 0001a000 08:05 9835188                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libzip.so
+7fdc9b7c4000-7fdc9b7c5000 rw-p 0001a000 08:05 9835188                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libzip.so
+7fdc9b7c5000-7fdc9b7cf000 r-xp 00000000 08:05 3014759                    /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7fdc9b7cf000-7fdc9b9ce000 ---p 0000a000 08:05 3014759                    /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7fdc9b9ce000-7fdc9b9cf000 r--p 00009000 08:05 3014759                    /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7fdc9b9cf000-7fdc9b9d0000 rw-p 0000a000 08:05 3014759                    /lib/x86_64-linux-gnu/libnss_files-2.19.so
+7fdc9b9d0000-7fdc9b9db000 r-xp 00000000 08:05 3014751                    /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7fdc9b9db000-7fdc9bbda000 ---p 0000b000 08:05 3014751                    /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7fdc9bbda000-7fdc9bbdb000 r--p 0000a000 08:05 3014751                    /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7fdc9bbdb000-7fdc9bbdc000 rw-p 0000b000 08:05 3014751                    /lib/x86_64-linux-gnu/libnss_nis-2.19.so
+7fdc9bbdc000-7fdc9bbf3000 r-xp 00000000 08:05 3014747                    /lib/x86_64-linux-gnu/libnsl-2.19.so
+7fdc9bbf3000-7fdc9bdf2000 ---p 00017000 08:05 3014747                    /lib/x86_64-linux-gnu/libnsl-2.19.so
+7fdc9bdf2000-7fdc9bdf3000 r--p 00016000 08:05 3014747                    /lib/x86_64-linux-gnu/libnsl-2.19.so
+7fdc9bdf3000-7fdc9bdf4000 rw-p 00017000 08:05 3014747                    /lib/x86_64-linux-gnu/libnsl-2.19.so
+7fdc9bdf4000-7fdc9bdf6000 rw-p 00000000 00:00 0 
+7fdc9bdf6000-7fdc9bdff000 r-xp 00000000 08:05 3014746                    /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7fdc9bdff000-7fdc9bffe000 ---p 00009000 08:05 3014746                    /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7fdc9bffe000-7fdc9bfff000 r--p 00008000 08:05 3014746                    /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7fdc9bfff000-7fdc9c000000 rw-p 00009000 08:05 3014746                    /lib/x86_64-linux-gnu/libnss_compat-2.19.so
+7fdc9c000000-7fdc9d423000 rw-p 00000000 00:00 0 
+7fdc9d423000-7fdca0000000 ---p 00000000 00:00 0 
+7fdca0000000-7fdca0021000 rw-p 00000000 00:00 0 
+7fdca0021000-7fdca004b000 r-xp 00000000 08:05 9835186                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjava.so
+7fdca004b000-7fdca024b000 ---p 0002a000 08:05 9835186                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjava.so
+7fdca024b000-7fdca024d000 rw-p 0002a000 08:05 9835186                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjava.so
+7fdca024d000-7fdca025a000 r-xp 00000000 08:05 9835195                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libverify.so
+7fdca025a000-7fdca045a000 ---p 0000d000 08:05 9835195                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libverify.so
+7fdca045a000-7fdca045c000 rw-p 0000d000 08:05 9835195                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libverify.so
+7fdca045c000-7fdca0463000 r-xp 00000000 08:05 3014755                    /lib/x86_64-linux-gnu/librt-2.19.so
+7fdca0463000-7fdca0662000 ---p 00007000 08:05 3014755                    /lib/x86_64-linux-gnu/librt-2.19.so
+7fdca0662000-7fdca0663000 r--p 00006000 08:05 3014755                    /lib/x86_64-linux-gnu/librt-2.19.so
+7fdca0663000-7fdca0664000 rw-p 00007000 08:05 3014755                    /lib/x86_64-linux-gnu/librt-2.19.so
+7fdca0664000-7fdca0769000 r-xp 00000000 08:05 3014675                    /lib/x86_64-linux-gnu/libm-2.19.so
+7fdca0769000-7fdca0968000 ---p 00105000 08:05 3014675                    /lib/x86_64-linux-gnu/libm-2.19.so
+7fdca0968000-7fdca0969000 r--p 00104000 08:05 3014675                    /lib/x86_64-linux-gnu/libm-2.19.so
+7fdca0969000-7fdca096a000 rw-p 00105000 08:05 3014675                    /lib/x86_64-linux-gnu/libm-2.19.so
+7fdca096a000-7fdca162d000 r-xp 00000000 08:05 9835212                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/server/libjvm.so
+7fdca162d000-7fdca182c000 ---p 00cc3000 08:05 9835212                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/server/libjvm.so
+7fdca182c000-7fdca1905000 rw-p 00cc2000 08:05 9835212                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/server/libjvm.so
+7fdca1905000-7fdca1950000 rw-p 00000000 00:00 0 
+7fdca1950000-7fdca1b0a000 r-xp 00000000 08:05 3014756                    /lib/x86_64-linux-gnu/libc-2.19.so
+7fdca1b0a000-7fdca1d0a000 ---p 001ba000 08:05 3014756                    /lib/x86_64-linux-gnu/libc-2.19.so
+7fdca1d0a000-7fdca1d0e000 r--p 001ba000 08:05 3014756                    /lib/x86_64-linux-gnu/libc-2.19.so
+7fdca1d0e000-7fdca1d10000 rw-p 001be000 08:05 3014756                    /lib/x86_64-linux-gnu/libc-2.19.so
+7fdca1d10000-7fdca1d15000 rw-p 00000000 00:00 0 
+7fdca1d15000-7fdca1d18000 r-xp 00000000 08:05 3014685                    /lib/x86_64-linux-gnu/libdl-2.19.so
+7fdca1d18000-7fdca1f17000 ---p 00003000 08:05 3014685                    /lib/x86_64-linux-gnu/libdl-2.19.so
+7fdca1f17000-7fdca1f18000 r--p 00002000 08:05 3014685                    /lib/x86_64-linux-gnu/libdl-2.19.so
+7fdca1f18000-7fdca1f19000 rw-p 00003000 08:05 3014685                    /lib/x86_64-linux-gnu/libdl-2.19.so
+7fdca1f19000-7fdca1f2e000 r-xp 00000000 08:05 9574440                    /home/rofpga/OptiSDR2/jdk1.8.0_92/lib/amd64/jli/libjli.so
+7fdca1f2e000-7fdca212e000 ---p 00015000 08:05 9574440                    /home/rofpga/OptiSDR2/jdk1.8.0_92/lib/amd64/jli/libjli.so
+7fdca212e000-7fdca212f000 rw-p 00015000 08:05 9574440                    /home/rofpga/OptiSDR2/jdk1.8.0_92/lib/amd64/jli/libjli.so
+7fdca212f000-7fdca2148000 r-xp 00000000 08:05 3014748                    /lib/x86_64-linux-gnu/libpthread-2.19.so
+7fdca2148000-7fdca2347000 ---p 00019000 08:05 3014748                    /lib/x86_64-linux-gnu/libpthread-2.19.so
+7fdca2347000-7fdca2348000 r--p 00018000 08:05 3014748                    /lib/x86_64-linux-gnu/libpthread-2.19.so
+7fdca2348000-7fdca2349000 rw-p 00019000 08:05 3014748                    /lib/x86_64-linux-gnu/libpthread-2.19.so
+7fdca2349000-7fdca234d000 rw-p 00000000 00:00 0 
+7fdca234d000-7fdca234f000 r-xp 00000000 08:05 9835182                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjsig.so
+7fdca234f000-7fdca254e000 ---p 00002000 08:05 9835182                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjsig.so
+7fdca254e000-7fdca254f000 rw-p 00001000 08:05 9835182                    /home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjsig.so
+7fdca254f000-7fdca2550000 rw-p 00000000 00:00 0 
+7fdca2550000-7fdca2573000 r-xp 00000000 08:05 3014749                    /lib/x86_64-linux-gnu/ld-2.19.so
+7fdca2573000-7fdca2574000 rw-s 1f0954000 00:06 525                       /dev/nvidiactl
+7fdca2574000-7fdca2576000 r--s 00001000 08:05 9572570                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil/jniloader/jniloader-1.1.jar
+7fdca2576000-7fdca2579000 r--s 00025000 08:05 9572666                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-io/commons-io/commons-io-2.1.jar
+7fdca2579000-7fdca2583000 r--s 00066000 08:05 9572469                    /home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.sun.jersey/jersey-core/jersey-core-1.8.jar
+7fdca2583000-7fdca264b000 rw-p 00000000 00:00 0 
+7fdca264b000-7fdca264e000 ---p 00000000 00:00 0 
+7fdca264e000-7fdca2751000 rw-p 00000000 00:00 0                          [stack:22652]
+7fdca2751000-7fdca2755000 r--s 0002a000 08:05 9572472                    /home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.typesafe/config/config-1.0.0.jar
+7fdca2755000-7fdca2757000 r--s 0000f000 08:05 9572475                    /home/rofpga/OptiSDR2/Delite/lib_managed/bundles/org.codehaus.jettison/jettison/jettison-1.1.jar
+7fdca2757000-7fdca275b000 r--s 00021000 08:05 9572465                    /home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.sun.jersey/jersey-json/jersey-json-1.8.jar
+7fdca275b000-7fdca2765000 r--s 0006e000 08:05 9572541                    /home/rofpga/OptiSDR2/Delite/lib_managed/jars/jfree/jcommon/jcommon-1.0.16.jar
+7fdca2765000-7fdca2766000 r--s 00000000 08:05 9699540                    /home/rofpga/OptiSDR2/Delite/unsafe_classes/unsafe.jar
+7fdca2766000-7fdca276e000 rw-s 00000000 08:05 7735231                    /tmp/hsperfdata_rofpga/22651
+7fdca276e000-7fdca276f000 rw-p 00000000 00:00 0 
+7fdca276f000-7fdca2770000 r--p 00000000 00:00 0 
+7fdca2770000-7fdca2772000 rw-p 00000000 00:00 0 
+7fdca2772000-7fdca2773000 r--p 00022000 08:05 3014749                    /lib/x86_64-linux-gnu/ld-2.19.so
+7fdca2773000-7fdca2774000 rw-p 00023000 08:05 3014749                    /lib/x86_64-linux-gnu/ld-2.19.so
+7fdca2774000-7fdca2775000 rw-p 00000000 00:00 0 
+7ffd2c5fd000-7ffd2c621000 rw-p 00000000 00:00 0                          [stack]
+7ffd2c728000-7ffd2c72a000 r--p 00000000 00:00 0                          [vvar]
+7ffd2c72a000-7ffd2c72c000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Ddelite.home=/home/rofpga/OptiSDR2/Delite -Ddelite.threads=1 -Ddelite.cpp=0 -Ddelite.cuda=1 -Ddelite.opencl=0 -Ddelite.runs=1 -Ddelite.executor=default -Ddelite.scheduler=default -Ddelite.master=0.0.0.0:5050 -Ddelite.slaves=0 -Ddelite.code.cache.home=/home/rofpga/OptiSDR2/Delite/generatedCache -Dprofile.output.dir=profile -Dprofile.dump=true -Ddelite.debug.profile=true -Xmx8g -Xms8g -Xbootclasspath/a:/home/rofpga/OptiSDR2/Delite/unsafe_classes/unsafe.jar 
+java_command: ppl.delite.runtime.Delite USRPApp3.deg
+java_class_path (initial): :/home/rofpga/OptiSDR2/Delite/runtime/target/scala-2.10/classes:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/jfree/jcommon/jcommon-1.0.16.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/jfree/jfreechart/jfreechart-1.0.13.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/poms/com.github.fommil.netlib/all/all-1.1.2.pom:/home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.sun.jersey/jersey-json/jersey-json-1.8.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.sun.jersey/jersey-server/jersey-server-1.8.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.sun.jersey/jersey-core/jersey-core-1.8.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/bundles/org.codehaus.jettison/jettison/jettison-1.1.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/bundles/com.typesafe/config/config-1.0.0.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/commons-io/commons-io/commons-io-2.1.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/com.github.fommil/jniloader/jniloader-1.1.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/scala-reflect/scala-reflect-2.10.2.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/scala-library/scala-library-2.10.2.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/jline/jline-2.10.2.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.scala-lang.virtualized/scala-compiler/scala-compiler-2.10.2.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/servlet-api/servlet-api-2.5-20081211.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/servlet-api-2.5/servlet-api-2.5-6.1.14.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jsp-api-2.1/jsp-api-2.1-6.1.14.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jetty-util/jetty-util-6.1.26.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jsp-2.1/jsp-2.1-6.1.14.jar:/home/rofpga/OptiSDR2/Delite/lib_managed/jars/org.mortbay.jetty/jet
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/home/rofpga/OptiSDR2/jdk1.8.0_92
+PATH=/usr/local/cuda-6.5/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/rofpga/OptiSDR2/Delite//bin:/home/rofpga/OptiSDR2/jdk1.8.0_92/bin:/home/rofpga/ScalaEditor
+LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:/home/rofpga/OptiSDR2/Delite/generated//libraries
+LD_PRELOAD=/home/rofpga/OptiSDR2/jdk1.8.0_92/jre/lib/amd64/libjsig.so
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xabdee0], sa_mask[0]=11111111111111111111111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xabdee0], sa_mask[0]=11111111111111111111111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGPIPE: SIG_IGN, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGXFSZ: SIG_IGN, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGILL: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x91bbb0], sa_mask[0]=00000000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x91cfb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x91cfb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x91cfb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x91cfb0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=14.04
+DISTRIB_CODENAME=trusty
+DISTRIB_DESCRIPTION="Ubuntu 14.04.4 LTS"
+
+uname:Linux 4.2.0-27-generic #32~14.04.1-Ubuntu SMP Fri Jan 22 15:32:26 UTC 2016 x86_64
+libc:glibc 2.19 NPTL 2.19 
+rlimit: STACK 8192k, CORE 0k, NPROC 31581, NOFILE 4096, AS infinity
+load average:2,84 12,81 9,89
+
+/proc/meminfo:
+MemTotal:        8106196 kB
+MemFree:         2158176 kB
+MemAvailable:    2450268 kB
+Buffers:           16868 kB
+Cached:          2381464 kB
+SwapCached:         9116 kB
+Active:          3406628 kB
+Inactive:        2303316 kB
+Active(anon):    3297452 kB
+Inactive(anon):  2110920 kB
+Active(file):     109176 kB
+Inactive(file):   192396 kB
+Unevictable:          32 kB
+Mlocked:              32 kB
+SwapTotal:       8316924 kB
+SwapFree:        6768456 kB
+Dirty:              6900 kB
+Writeback:             0 kB
+AnonPages:       3311272 kB
+Mapped:          2263012 kB
+Shmem:           2096780 kB
+Slab:              80552 kB
+SReclaimable:      32892 kB
+SUnreclaim:        47660 kB
+KernelStack:        6496 kB
+PageTables:        37952 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    12370020 kB
+Committed_AS:   15058916 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      142724 kB
+VmallocChunk:   34359535612 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   2977792 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      347692 kB
+DirectMap2M:     7972864 kB
+
+
+CPU:total 4 (4 cores per cpu, 1 threads per core) family 6 model 30 stepping 5, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, tsc, tscinvbit
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 30
+model name	: Intel(R) Core(TM) i5 CPU         760  @ 2.80GHz
+stepping	: 5
+microcode	: 0x4
+cpu MHz		: 1197.000
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 4
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 popcnt lahf_lm ida dtherm tpr_shadow vnmi flexpriority ept vpid
+bugs		:
+bogomips	: 5585.85
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 30
+model name	: Intel(R) Core(TM) i5 CPU         760  @ 2.80GHz
+stepping	: 5
+microcode	: 0x4
+cpu MHz		: 1197.000
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 4
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 popcnt lahf_lm ida dtherm tpr_shadow vnmi flexpriority ept vpid
+bugs		:
+bogomips	: 5585.85
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 30
+model name	: Intel(R) Core(TM) i5 CPU         760  @ 2.80GHz
+stepping	: 5
+microcode	: 0x4
+cpu MHz		: 2660.000
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 4
+core id		: 2
+cpu cores	: 4
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 popcnt lahf_lm ida dtherm tpr_shadow vnmi flexpriority ept vpid
+bugs		:
+bogomips	: 5585.85
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 30
+model name	: Intel(R) Core(TM) i5 CPU         760  @ 2.80GHz
+stepping	: 5
+microcode	: 0x4
+cpu MHz		: 2794.000
+cache size	: 8192 KB
+physical id	: 0
+siblings	: 4
+core id		: 3
+cpu cores	: 4
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 11
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 popcnt lahf_lm ida dtherm tpr_shadow vnmi flexpriority ept vpid
+bugs		:
+bogomips	: 5585.85
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 8106196k(2158176k free), swap 8316924k(6768456k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.92-b14) for linux-amd64 JRE (1.8.0_92-b14), built on Mar 31 2016 21:08:29 by "java_re" with gcc 4.3.0 20080428 (Red Hat 4.3.0-8)
+
+time: Thu Jul  7 12:39:25 2016
+elapsed time: 180 seconds (0d 0h 3m 0s)
+

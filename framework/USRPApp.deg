@@ -1,0 +1,900 @@
+{"DEG":{
+"version" : 0.1,
+"name" : "",
+"kernelpath" : "/home/rofpga/OptiSDR2/Delite/generated/",
+"targets": ["scala","cuda","cpp"],
+"ops": [
+{"type" : "Arguments", "kernelId" : "x0", "index" : "0",
+  "return-types":{"scala" : "Array[java.lang.String]","cpp" : "cppDeliteArraystring"}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpinit",
+    "line": "63" } , "kernelId" : "x173"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x173"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":[],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x173":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpinit",
+    "line": "63" } , "kernelId" : "x174"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x174"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x173"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x174":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "repDArrayToDArrayOps",
+    "line": "177" } , "kernelId" : "x175"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x175"],
+  "inputs":["x174"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x175":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpinit",
+    "line": "63" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x175"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x175":"none","x174":"one","x173":"none"}
+ , "kernelId" : "x179"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x179"],
+  "inputs":["x175","x174","x173"],
+  "mutableInputs":["x173"],
+  "controlDeps":["x173","x174","x175"],
+  "antiDeps":[],
+  "metadata":{"cuda" : {"gpuOutputs":{"x179":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x174","x173"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x179","cuda" : "activation_x179","cpp" : "activation_x179"},
+  "output-types":{"x179":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpinit",
+    "line": "63" } , "kernelId" : "x180"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x180"],
+  "inputs":["x173"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x179"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x180":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "65" } , "kernelId" : "x181"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x181"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x181":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "65" } , "kernelId" : "x182"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x182"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x182":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "repDArrayToDArrayOps",
+    "line": "188" } , "kernelId" : "x183"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x183"],
+  "inputs":["x181"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x183":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "65" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x183"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x183":"none","x181":"one","x182":"one"}
+ , "kernelId" : "x189"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x189"],
+  "inputs":["x183","x181","x182"],
+  "mutableInputs":["x181","x182"],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183"],
+  "antiDeps":["x183"],
+  "metadata":{"cuda" : {"gpuOutputs":{"x189":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x181","x182"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x189","cuda" : "activation_x189","cpp" : "activation_x189"},
+  "output-types":{"x189":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "65" } , "kernelId" : "x190"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x190"],
+  "inputs":["x181"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x189"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x190":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "65" } , "kernelId" : "x191"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x191"],
+  "inputs":["x182"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x189"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x191":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x192"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x192"],
+  "inputs":["x190"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x192":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x193"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x193"],
+  "inputs":["x190"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x193":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x190"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x190":"none","x181":"one","x192":"none","x182":"one","x193":"none"}
+ , "kernelId" : "x199"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x199"],
+  "inputs":["x190","x181","x192","x182","x193"],
+  "mutableInputs":["x192","x193"],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x189"],
+  "antiDeps":[],
+  "metadata":{"cuda" : {"gpuOutputs":{"x199":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x181","x192","x182","x193"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x199","cuda" : "activation_x199","cpp" : "activation_x199"},
+  "output-types":{"x199":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x200"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x200"],
+  "inputs":["x192"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x199"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x200":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x201"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x201"],
+  "inputs":["x193"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x199"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x201":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "67" } , "kernelId" : "x202"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x202"],
+  "inputs":["x200"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x202":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "67" } , "kernelId" : "x203"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x203"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x203":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "67" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x200"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x200":"none","x192":"one","x202":"none","x193":"one","x203":"none"}
+ , "kernelId" : "x209"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x209"],
+  "inputs":["x200","x192","x202","x193","x203"],
+  "mutableInputs":["x202","x203"],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x199"],
+  "antiDeps":[],
+  "metadata":{"cuda" : {"gpuOutputs":{"x209":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x192","x202","x193","x203"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x209","cuda" : "activation_x209","cpp" : "activation_x209"},
+  "output-types":{"x209":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "67" } , "kernelId" : "x210"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x210"],
+  "inputs":["x202"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x209"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x210":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "apply",
+    "line": "68" } , "kernelId" : "x226"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x226"],
+  "inputs":["x202"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x209"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.DenseVectorFloat","cuda" : "cudaDenseVectorFloat","cpp" : "cppDenseVectorFloat"},
+  "output-types":{"x226":{"scala" : "generated.scala.DenseVectorFloat","cuda" : "cudaDenseVectorFloat","cpp" : "cppDenseVectorFloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "Log10",
+    "line": "68" } , "kernelId" : "x227"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x227"],
+  "inputs":["x226"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x227":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "apply",
+    "line": "172" } , "kernelId" : "x228"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x228"],
+  "inputs":["x227"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Double]","cuda" : "cudaDeliteArraydouble","cpp" : "cppDeliteArraydouble"},
+  "output-types":{"x228":{"scala" : "Array[Double]","cuda" : "cudaDeliteArraydouble","cpp" : "cppDeliteArraydouble"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "var_new",
+    "line": "172" } , "kernelId" : "x229"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x229"],
+  "inputs":["x228"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Array[Double]]","cuda" : "cudaRefcudaDeliteArraydouble","cpp" : "cppRefcppDeliteArraydouble"},
+  "output-types":{"x229":{"scala" : "generated.scala.Ref[Array[Double]]","cuda" : "cudaRefcudaDeliteArraydouble","cpp" : "cppRefcppDeliteArraydouble"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "var_new",
+    "line": "172" } , "kernelId" : "x230"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x230"],
+  "inputs":["x227"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Int]","cuda" : "cudaRefint32_t","cpp" : "cppRefint32_t"},
+  "output-types":{"x230":{"scala" : "generated.scala.Ref[Int]","cuda" : "cudaRefint32_t","cpp" : "cppRefint32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "var_new",
+    "line": "172" } , "kernelId" : "x231"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x231"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Boolean]","cuda" : "cudaRefbool","cpp" : "cppRefbool"},
+  "output-types":{"x231":{"scala" : "generated.scala.Ref[Boolean]","cuda" : "cudaRefbool","cpp" : "cppRefbool"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "Log10",
+    "line": "68" } , "kernelId" : "x232"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x232"],
+  "inputs":["x229","x230","x231"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.DenseVectorDouble","cuda" : "cudaDenseVectorDouble","cpp" : "cppDenseVectorDouble"},
+  "output-types":{"x232":{"scala" : "generated.scala.DenseVectorDouble","cuda" : "cudaDenseVectorDouble","cpp" : "cppDenseVectorDouble"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "length",
+    "line": "473" } , "kernelId" : "x233"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x233"],
+  "inputs":["x232"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231","x232"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x233":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "apply",
+    "line": "475" } , "kernelId" : "x234"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x234"],
+  "inputs":["x226"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231","x232","x233"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x234":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "Log10",
+    "line": "68" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x233"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x233":"none","x232":"none","x234":"one"}
+ , "kernelId" : "x241"  , "supportedTargets": ["scala"],
+  "outputs":["x241"],
+  "inputs":["x233","x232","x234"],
+  "mutableInputs":["x232"],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231","x232","x233"],
+  "antiDeps":["x233"],
+  "metadata":{},
+  "return-types":{"scala" : "activation_x241","cuda" : "activation_x241","cpp" : "activation_x241"},
+  "output-types":{"x241":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "rtplot",
+    "line": "69" } , "kernelId" : "x242"  , "supportedTargets": ["scala"],
+  "outputs":["x242"],
+  "inputs":["x232"],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231","x232","x233","x241"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : " OptiSDRRealTimePSD"},
+  "output-types":{"x242":{"scala" : " OptiSDRRealTimePSD"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "__newVar",
+    "line": "73" } , "kernelId" : "x243"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x243"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231","x232","x233","x242"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Boolean]","cuda" : "cudaRefbool","cpp" : "cppRefbool"},
+  "output-types":{"x243":{"scala" : "generated.scala.Ref[Boolean]","cuda" : "cudaRefbool","cpp" : "cppRefbool"}}
+},
+{"type":"WhileLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "__whileDo",
+    "line": "74" },
+
+  "outputId" : "x309",
+  "condType": "symbol",
+  "condOps": [
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "readVar",
+    "line": "74" } , "kernelId" : "x244"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x244"],
+  "inputs":["x243"],
+  "mutableInputs":[],
+  "controlDeps":[],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Boolean","cuda" : "bool","cpp" : "bool"},
+  "output-types":{"x244":{"scala" : "Boolean","cuda" : "bool","cpp" : "bool"}}
+},
+{"type":"EOG"}
+],
+  "bodyType": "symbol",
+  "bodyOps": [
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "76" } , "kernelId" : "x246"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x246"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":[],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x246":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "76" } , "kernelId" : "x247"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x247"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x246"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x247":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "repDArrayToDArrayOps",
+    "line": "188" } , "kernelId" : "x248"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x248"],
+  "inputs":["x246"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x248":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "76" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x248"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x248":"none","x246":"one","x247":"one"}
+ , "kernelId" : "x254"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x254"],
+  "inputs":["x248","x246","x247"],
+  "mutableInputs":["x246","x247"],
+  "controlDeps":["x246","x247","x248"],
+  "antiDeps":["x248"],
+  "metadata":{"cuda" : {"gpuOutputs":{"x254":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x246","x247"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x254","cuda" : "activation_x254","cpp" : "activation_x254"},
+  "output-types":{"x254":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "76" } , "kernelId" : "x255"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x255"],
+  "inputs":["x246"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x254"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x255":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "usrpstream",
+    "line": "76" } , "kernelId" : "x256"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x256"],
+  "inputs":["x247"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x254"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x256":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x257"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x257"],
+  "inputs":["x255"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x257":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x258"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x258"],
+  "inputs":["x255"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x258":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x255"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x255":"none","x246":"one","x257":"none","x247":"one","x258":"none"}
+ , "kernelId" : "x264"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x264"],
+  "inputs":["x255","x246","x257","x247","x258"],
+  "mutableInputs":["x257","x258"],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x254"],
+  "antiDeps":[],
+  "metadata":{"cuda" : {"gpuOutputs":{"x264":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x246","x257","x247","x258"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x264","cuda" : "activation_x264","cpp" : "activation_x264"},
+  "output-types":{"x264":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x265"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x265"],
+  "inputs":["x257"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x264"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x265":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/signal/FourierTransformsOps.scala",
+    "opName": "fft_obj_call",
+    "line": "39" } , "kernelId" : "x266"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x266"],
+  "inputs":["x258"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x264"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x266":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "77" } , "kernelId" : "x267"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x267"],
+  "inputs":["x265"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x267":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "77" } , "kernelId" : "x268"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x268"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x268":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "77" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x265"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x265":"none","x257":"one","x267":"none","x258":"one","x268":"none"}
+ , "kernelId" : "x274"  , "supportedTargets": ["scala","cuda","cpp"],
+  "outputs":["x274"],
+  "inputs":["x265","x257","x267","x258","x268"],
+  "mutableInputs":["x267","x268"],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x264"],
+  "antiDeps":[],
+  "metadata":{"cuda" : {"gpuOutputs":{"x274":{"elemType":"FOREACH","types":{"mA":"void"},"funcs":{"process":["x257","x267","x258","x268"]}}},"gpuTemps":[],"aux":{}}},
+  "return-types":{"scala" : "activation_x274","cuda" : "activation_x274","cpp" : "activation_x274"},
+  "output-types":{"x274":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "abs",
+    "line": "77" } , "kernelId" : "x275"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x275"],
+  "inputs":["x267"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x274"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x275":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "apply",
+    "line": "78" } , "kernelId" : "x291"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x291"],
+  "inputs":["x267"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x274"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.DenseVectorFloat","cuda" : "cudaDenseVectorFloat","cpp" : "cppDenseVectorFloat"},
+  "output-types":{"x291":{"scala" : "generated.scala.DenseVectorFloat","cuda" : "cudaDenseVectorFloat","cpp" : "cppDenseVectorFloat"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "Log10",
+    "line": "78" } , "kernelId" : "x292"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x292"],
+  "inputs":["x291"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x292":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "apply",
+    "line": "172" } , "kernelId" : "x293"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x293"],
+  "inputs":["x292"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Double]","cuda" : "cudaDeliteArraydouble","cpp" : "cppDeliteArraydouble"},
+  "output-types":{"x293":{"scala" : "Array[Double]","cuda" : "cudaDeliteArraydouble","cpp" : "cppDeliteArraydouble"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "var_new",
+    "line": "172" } , "kernelId" : "x294"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x294"],
+  "inputs":["x293"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Array[Double]]","cuda" : "cudaRefcudaDeliteArraydouble","cpp" : "cppRefcppDeliteArraydouble"},
+  "output-types":{"x294":{"scala" : "generated.scala.Ref[Array[Double]]","cuda" : "cudaRefcudaDeliteArraydouble","cpp" : "cppRefcppDeliteArraydouble"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "var_new",
+    "line": "172" } , "kernelId" : "x295"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x295"],
+  "inputs":["x292"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Int]","cuda" : "cudaRefint32_t","cpp" : "cppRefint32_t"},
+  "output-types":{"x295":{"scala" : "generated.scala.Ref[Int]","cuda" : "cudaRefint32_t","cpp" : "cppRefint32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optila/src/ppl/dsl/optila/vector/DenseVectorOps.scala",
+    "opName": "var_new",
+    "line": "172" } , "kernelId" : "x296"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x296"],
+  "inputs":[],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294","x295"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.Ref[Boolean]","cuda" : "cudaRefbool","cpp" : "cppRefbool"},
+  "output-types":{"x296":{"scala" : "generated.scala.Ref[Boolean]","cuda" : "cudaRefbool","cpp" : "cppRefbool"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "Log10",
+    "line": "78" } , "kernelId" : "x297"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x297"],
+  "inputs":["x294","x295","x296"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294","x295","x296"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "generated.scala.DenseVectorDouble","cuda" : "cudaDenseVectorDouble","cpp" : "cppDenseVectorDouble"},
+  "output-types":{"x297":{"scala" : "generated.scala.DenseVectorDouble","cuda" : "cudaDenseVectorDouble","cpp" : "cppDenseVectorDouble"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "length",
+    "line": "473" } , "kernelId" : "x298"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x298"],
+  "inputs":["x297"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294","x295","x296","x297"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"},
+  "output-types":{"x298":{"scala" : "Int","cuda" : "int32_t","cpp" : "int32_t"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/dsls/optisdr/src/uct/optisdr/datagenerators/WaveformGeneratorOps.scala",
+    "opName": "apply",
+    "line": "475" } , "kernelId" : "x299"  , "supportedTargets": ["scala","cpp"],
+  "outputs":["x299"],
+  "inputs":["x291"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294","x295","x296","x297","x298"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"},
+  "output-types":{"x299":{"scala" : "Array[Float]","cuda" : "cudaDeliteArrayfloat","cpp" : "cppDeliteArrayfloat"}}
+},
+{"type":"MultiLoop",
+  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "Log10",
+    "line": "78" },
+
+  "sizeType": "symbol",
+  "sizeValue": "x298"
+,
+
+  "numDynamicChunksType": "const",
+  "numDynamicChunksValue": "0"
+,"needsCombine":false,"needsPostProcess":false
+ , "stencil":{"x298":"none","x297":"none","x299":"one"}
+ , "kernelId" : "x306"  , "supportedTargets": ["scala"],
+  "outputs":["x306"],
+  "inputs":["x298","x297","x299"],
+  "mutableInputs":["x297"],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294","x295","x296","x297","x298"],
+  "antiDeps":["x298"],
+  "metadata":{},
+  "return-types":{"scala" : "activation_x306","cuda" : "activation_x306","cpp" : "activation_x306"},
+  "output-types":{"x306":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"SingleTask",  "sourceContext": {
+    "fileName": "/home/rofpga/OptiSDR2/Delite/apps/optisdr/src/USRPApp.scala",
+    "opName": "refresh",
+    "line": "79" } , "kernelId" : "x307"  , "supportedTargets": ["scala"],
+  "outputs":["x307"],
+  "inputs":["x242","x297"],
+  "mutableInputs":[],
+  "controlDeps":["x246","x247","x248","x255","x256","x257","x258","x265","x266","x267","x268","x275","x291","x293","x294","x295","x296","x297","x298","x306"],
+  "antiDeps":[],
+  "metadata":{},
+  "return-types":{"scala" : "Unit","cuda" : "void","cpp" : "void"},
+  "output-types":{"x307":{"scala" : "Unit","cuda" : "void","cpp" : "void"}}
+},
+{"type":"EOG"}
+],
+  "condOutput": "x244",
+  "controlDeps":["x173","x174","x175","x180","x181","x182","x183","x190","x191","x192","x193","x200","x201","x202","x203","x210","x226","x228","x229","x230","x231","x232","x233","x242","x243"],
+  "antiDeps":[]
+},
+{"type":"EOP",
+  "return-types":{"scala" : "Unit","cuda" : "void","cpp" : "void"},
+  "Type": "const",
+  "Value": "()"
+}
+]}}
