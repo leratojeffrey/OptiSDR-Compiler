@@ -1,4 +1,4 @@
-Delite 2.0
+OptiSDR 0.0
 ==========
-
-[Setup instructions](http://stanford-ppl.github.com/Delite/source.html)
+0. Pre-requisites: LMS, JDK1.7/1.8
+1. 
